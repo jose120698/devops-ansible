@@ -38,7 +38,27 @@ This repository serves as our configuration management repository. In order to k
  - `env`  -- Host environment to target
  - Check Ansible documentation for additional global variables
 
+## HostType and env Definition
+The combination of __HostType__ and __env__ is an internal organization scheme that I have developed by utilizing the flexibility of Ansible in order to assist the grouping of hosts together as well as targeting Ansible playbook execution to a limited scope of hosts. This allows us to run the same `site.yml` playbook every time, however we can granularly target hosts all the way down to specific tasks if desired. The result of this is much easier automation of Ansible playbook executions as well as removing the burden of needing to know which exact playbook you need to run to perform your desired actions against the infrastructure.
+
+__HostType__ refers to the playbook that you want executed against that host each and every time Ansible is targeted against that host. (i.e. `HostType-gitlab`)
+
+__env__ refers to the environment in which you want to target.
+
+The way it works is, when Ansible executes it creates an intersection between those 2 host groups (`HostType` and `env`) and only executes playbooks where that intersection occurs. For example, if you wanted to install Gitlab on a host in `dev` you would simply add your host (i.e. `dev1.example.com 10.10.10.10`) to the following host groups in Ansible inventory: `gitlab` and `dev`. From there you could execute Ansible using the following command: `ansible-playbook site.yml -e "env=dev" -t "gitlab"` and the result would be that Ansible would install Gitlab on the `dev1.example.com` host in the `dev` environment, as well as any other hosts which are defined both in the `gitlab` and `dev` host groups simultaneously.
+
 ## Create New Roles and Playbooks
+There are 2 types of Ansible playbooks which we are currently developing:
+1. Standard playbooks which perform actions directly on a host
+2. Docker container based playbooks which manage Docker containers on a host
+
+The reasoning for the distinction between `standard` and `Docker container` based playbooks is because we may have a service which is installed 2 different ways.
+1. As a standard service running on a host
+2. As a Docker container running on a host
+
+The result of this is, we may have 2 roles and playbooks defined for the same service; one for the standard service and another one for the Docker service. If that is the case, we would have a collision of role names. This methodology avoids such scenarios.
+
+### Please follow these instructions to create your new playbooks:
 1. Create a new playbook in `playbooks` prefixed with one of the following prefixes:
    1. `HostType-` for standard playbooks (i.e. `HostType-gitlab.yml`)
    2. `Docker-` for Docker container based playbooks (i.e. `Docker-gitlab.yml`)

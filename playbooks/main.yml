@@ -28,4 +28,5 @@
     - java
 
 # Include your playbooks below, order may be important
+## Note that this is using the intersection of the HostType/Docker and env groups.
 - include: Docker-gitlab.yml
