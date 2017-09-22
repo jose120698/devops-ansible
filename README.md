@@ -17,12 +17,12 @@ This repository serves as our configuration management repository. In order to k
  - `inventory-vagrant/`                -- Directory of static inventory files and variable files for `Vagrant`
  - `inventory-vagrant/group_vars/`     -- Group variables
  - `inventory-vagrant/inventory/`      -- Directory of static inventory files for `Vagrant`
- - `library`                           -- Custom `Ansible modules`
- - `libs`                              -- Custom libraries and supporting scripts
- - `libs/rundeck-vagrant`              -- Example rundeck job for executing Ansible with Rundeck in Vagrant
+ - `library/`                          -- Custom `Ansible modules`
+ - `libs/`                             -- Custom libraries and supporting scripts
+ - `libs/rundeck-vagrant.yml`          -- Example rundeck job for executing Ansible with Rundeck in Vagrant
  - `playbooks/`                        -- Recipes for configuration and appropriate related actions
  - `playbooks/roles/`                  -- Roles and modules under them for which we act upon within Ansible
- - `vagrant-libs`                      -- Required files for `Vagrant` provisioning
+ - `vagrant-libs/`                     -- Required files for `Vagrant` provisioning
  - `.gitignore`                        -- Git ignore file.
  - `ansible.cfg`                       -- Ansible program configuration variables.
                                        -- This file should not be modified under most circumstances.
