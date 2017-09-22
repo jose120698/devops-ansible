@@ -1,0 +1,8 @@
+#[consul-servers]
+#localhost ansible_connection=local
+
+[consul-agents]
+localhost ansible_connection=local
+
+[traefik-servers]
+localhost ansible_connection=local

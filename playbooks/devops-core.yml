@@ -1,0 +1,15 @@
+---
+- hosts: consul-servers
+  become: "yes"
+  roles:
+    - { role: roles/consul-server }
+
+- hosts: consul-agents
+  become: "yes"
+  roles:
+    - { role: roles/consul-agent }
+
+- hosts: traefik-servers
+  become: "yes"
+  roles:
+    - { role: roles/traefik-server }
