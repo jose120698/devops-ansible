@@ -8,10 +8,11 @@ This repository serves as our configuration management repository. In order to k
 4. __Use feature branching when pushing.__ When you push to the Ansible source repository, push your changes to a feature branch, i.e. `gitlab` and then issue a merge request when you are ready to have your code merged. This allows at least 2 sets of eyes on everything that gets added to the Ansible code base.
 5. __Always tag your role tasks with the name of the role.__ This allows fine-grained targeting of systems with specific roles and playbooks.
 6. __Never target production systems__ from your local machine, Vagrant or any non-assigned Ansible control nodes or from the command line of a control node. This helps us to ensure that all actions taken against production systems are logged/audited properly; as we orchestrate the execution of Ansible from tools which retain the logs and activities of Ansible.
-7. __Give each task a name__ so that the Ansible execution output is easier to read by humans.
+7. __Give each task a unique name__ so that the Ansible execution output is easier to read by humans. Uniqueness of the task name simplifies troubleshooting.
 8. __Never use `ignore_errors`__ unless you absolutely have to.
-9. __Add padding to your variables.__ For example, `{{hard_to_read}}` and `{{ easier_to_read }}`.
-10. __Use Pascal Case for boolean.__ Instead of `true` use `True`.
+9. __Avoid using bare `shell`__ module as it is always non-idempotent.
+10. __Add padding to your variables.__ For example, `{{hard_to_read}}` and `{{ easier_to_read }}`.
+11. __Use Pascal Case for boolean.__ Instead of `true` use `True`.
 
 # Ansible Config Tree
  - `inventory-vagrant/`                -- Directory of static inventory files and variable files for `Vagrant`
