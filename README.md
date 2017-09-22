@@ -64,5 +64,8 @@ This repository serves as our configuration management repository. In order to k
 
 __Uncomment `vagrant` in the inventory file (inventory-vagrant/inventory/vagrant) under any product you'd like to install__
 
+# Hepful Tips
+- Add `-vvvv` to your Ansible execution to get extremely verbose output
+
 # Notes
  - You can store your custom roles in `/etc/ansible/roles` and they will be automatically picked up

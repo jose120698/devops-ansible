@@ -8,7 +8,7 @@
   stat: >
     path={{ sshd_banner }}
   register: sshd_banner_file
-  always_run: True
+  check_mode: False
   tags: sshd
 
 - name: sshd banner
@@ -34,5 +34,5 @@
 
 #TODO: Needs to be 'ssh' for Debian
 - name: started and enabled
-  service: name=sshd state=running enabled=yes
+  service: name=sshd state=started enabled=yes
   tags: sshd

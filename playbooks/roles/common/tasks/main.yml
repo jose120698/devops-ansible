@@ -3,19 +3,11 @@
 ## environment
 
 - name: kill RedHat subscription manager
-  command: rm -rf /etc/yum/pluginconf.d/subscription-manager.conf
+  file:
+    path: '/etc/yum/pluginconf.d/subscription-manager.conf'
+    state: absent
   tags:
     - common
-
-- name: create swap-file if using vagrant due to low memory
-  command: "{{ item }}"
-  with_items:
-    - "mkdir -p /var/cache/swap/"
-    - "dd if=/dev/zero of /var/cache/swap/swap0 bs=1M count=512"
-    - "chmod 0600 /var/cache/swap/swap0"
-    - "mkswap /var/cache/swap/swap0"
-    - "swapon /var/cache/swap/swap0"
-  when: ansible_user == "vagrant"
 
 ## Install our common packages
 - name: install common packages (RedHat)
@@ -39,6 +31,7 @@
   command: rpm -q cups
   register: cups_check
   changed_when: False
+  ignore_errors: True
   tags:
     - common
 
@@ -55,6 +48,7 @@
   command:  rpm -q samba-winbind
   register: winbind_check
   changed_when: False
+  ignore_errors: True
   tags:
     - common
 
@@ -70,6 +64,7 @@
 - name: stop ttyS0
   command: stop ttyS0
   changed_when: False
+  ignore_errors: True
   tags:
     - common
 
@@ -77,6 +72,8 @@
   command: >
     mv -f /etc/init/ttyS0.conf /etc/init/ttyS0.conf.NOT
     creates=/etc/init/ttyS0.conf.NOT
+  ignore_errors: True
+  changed_when: False
   tags:
     - common
 
@@ -110,8 +107,10 @@
   tags:
     - common
 
-- name: Clear previous Ansible user password if exist
-  shell: if [ $(grep -c {{ ansible_user }} /etc/passwd) -eq 1 ]; then sudo passwd -d {{ ansible_user }}; fi
+- name: Clear Ansible user password if exist
+  shell: passwd -d {{ ansible_user }}
+  changed_when: False
+  # when: ansiblepass|success
   tags:
     - common
 

@@ -22,19 +22,6 @@
 - name: Ansible Common Play
   hosts: "{{ env }}"
   become: True
-  remote_user: "{{ ansible_user }}"
-  tasks:
-    - name: Check mode test 1
-      command: /bin/true
-      register: noop_result
-      tags: always
-    - name: Check mode test 2
-      set_fact: Testing={{ noop_result|skipped }}
-      tags: always
-    - name: Is Ansible running in check mode?
-      debug: msg="Ansible is running in **** CHECK MODE ****"
-      when: Testing
-      tags: always
   roles:
     - common
     - sshd
