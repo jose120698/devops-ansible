@@ -1,6 +1,6 @@
 ---
 - name: Ansible HostType docker_gitlab Play
   hosts: "{{ env }}:&docker_gitlab"
-  become: False
+  become: True
   roles:
     - docker_gitlab
