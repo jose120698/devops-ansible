@@ -39,16 +39,28 @@ This repository serves as our configuration management repository. In order to k
  - Check Ansible documentation for additional global variables
 
 ## Create New Roles and Playbooks
-1. Create a new playbook in `playbooks` prefixed with `HostType-`, for example a Gitlab playbook would be named `HostType-gitlab.yml`
-2. Structure your playbook content like the following example:
-```
----
-- name: Ansible HostType gitlab Play
-  hosts: "{{ env }}:&gitlab"
-  become: True
-  roles:
-    - gitlab
-```
+1. Create a new playbook in `playbooks` prefixed with one of the following prefixes:
+   1. `HostType-` for standard playbooks (i.e. `HostType-gitlab.yml`)
+   2. `Docker-` for Docker container based playbooks (i.e. `Docker-gitlab.yml`)
+2. Structure your playbook content like the following examples:
+   1. For standard playbooks:
+      ```
+      ---
+      - name: Ansible HostType gitlab Play
+        hosts: "{{ env }}:&gitlab"
+        become: True
+        roles:
+          - gitlab
+      ```
+    2. For Docker container based playbooks (note the role name is `docker_gitlab`):
+      ```
+      ---
+      - name: Ansible HostType docker_gitlab Play
+        hosts: "{{ env }}:&docker_gitlab"
+        become: True
+        roles:
+          - gitlab
+      ```
 3. Include your new playbook at the end of `playbooks/main.yml`
    * `- include: HostType-gitlab.yml`
 4. Duplicate the `playbooks/roles/role-skel` directory and follow the instructions in `playbooks/roles/role-skel/README.md` to create your role
