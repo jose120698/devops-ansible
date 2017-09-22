@@ -18,6 +18,8 @@ This repository serves as our configuration management repository. In order to k
  - `inventory-vagrant/group_vars/`     -- Group variables
  - `inventory-vagrant/inventory/`      -- Directory of static inventory files for `Vagrant`
  - `library`                           -- Custom `Ansible modules`
+ - `libs`                              -- Custom libraries and supporting scripts
+ - `libs/rundeck-vagrant`              -- Example rundeck job for executing Ansible with Rundeck in Vagrant
  - `playbooks/`                        -- Recipes for configuration and appropriate related actions
  - `playbooks/roles/`                  -- Roles and modules under them for which we act upon within Ansible
  - `vagrant-libs`                      -- Required files for `Vagrant` provisioning
@@ -92,12 +94,10 @@ The result of this is, we may have 2 roles and playbooks defined for the same se
 2. Inside the root of the repository, on your command line, type: `vagrant up` to bring up the Vagrant machine
 3. After the Vagrant machine comes up, type: `vagrant ssh` to ssh into the Vagrant machine
 4. Run the following command inside the Vagrant machine: `cd /vagrant; ansible-playbook site.yml -e "env=vagrant"` to execute Ansible. You can execute this command each time you want to test your changes. You may also run Ansible in "check mode" by adding the `--check` parameter to the end, like so: `cd /vagrant; ansible-playbook site.yml -e "env=vagrant" --check`
-5. You can modify the `Vagrantfile` inside the repository to add any additional ports you need forwarded, after doing so you must re-provision your machine. Please see the Vagrant docs for further information
+5. You can modify the `Vagrantfile` inside the repository to add any additional ports you need forwarded, after doing so you must reload your Vagrant machine (`vagrant reload`) to pick up the new changes. Please see the Vagrant docs for further information
 
 __Uncomment `vagrant` in the inventory file (inventory-vagrant/inventory/vagrant) under any product you'd like to install__
 
 # Hepful Tips
 - Add `-vvvv` to your Ansible execution to get extremely verbose output
-
-# Notes
- - You can store your custom roles in `/etc/ansible/roles` and they will be automatically picked up
+- You are able to store your custom roles (for testing purposes) in `/etc/ansible/roles` and they will be automatically picked up (if you don't want to commit them to the repository)

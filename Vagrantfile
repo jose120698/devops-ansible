@@ -6,6 +6,8 @@ machines = {
     'box' => 'travisrowland/centos7',
     'local_ports' => {
       '80' => '8880',
+      # Rundeck
+      '4440' => '4440',
     },
   },
 }
