@@ -1,0 +1,10 @@
+---
+## This file is to handle the service output for common task notifications
+- name: stop iptables
+  service:  name=iptables state=stopped
+
+- name: stop cups
+  service:  name=cups state=stopped
+
+- name: stop winbind
+  service:  name=winbind state=stopped

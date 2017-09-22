@@ -1,0 +1,50 @@
+---
+sshd_Port: '22'
+#ListenAddress ::
+#ListenAddress 0.0.0.0
+sshd_Protocol: '2'
+sshd_HostKeys:
+  - '/etc/ssh/ssh_host_rsa_key'
+  - '/etc/ssh/ssh_host_dsa_key'
+  - '/etc/ssh/ssh_host_ecdsa_key'
+  - '/etc/ssh/ssh_host_ed25519_key'
+sshd_UsePrivilegeSeparation: 'yes'
+sshd_KeyRegenerationInterval: '3600'
+sshd_ServerKeyBits: '1024'
+sshd_SyslogFacility: 'AUTH'
+sshd_LogLevel: 'INFO'
+sshd_LoginGraceTime: '120'
+sshd_PermitRootLogin: 'without-password'
+sshd_StrictModes: 'yes'
+sshd_RSAAuthentication: 'yes'
+sshd_PubkeyAuthentication: 'yes'
+#AuthorizedKeysFile	%h/.ssh/authorized_keys
+sshd_IgnoreRhosts: 'yes'
+sshd_RhostsRSAAuthentication: 'no'
+sshd_HostbasedAuthentication: 'no'
+#IgnoreUserKnownHosts yes
+sshd_permitEmptyPasswords: 'no'
+sshd_ChallengeResponseAuthentication: 'no'
+sshd_PasswordAuthentication: 'yes'
+#KerberosAuthentication no
+#KerberosGetAFSToken no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+sshd_X11Forwarding: 'yes'
+sshd_X11DisplayOffset: '10'
+sshd_PrintMotd: 'no'
+sshd_PrintLastLog: 'yes'
+sshd_TCPKeepAlive: 'yes'
+#UseLogin no
+#MaxStartups 10:30:60
+#Banner /etc/issue.net
+sshd_AcceptEnv: 'LANG LC_*'
+sshd_Subsystem: 'sftp /usr/libexec/openssh/sftp-server'
+sshd_UsePAM: 'yes'
+
+sshd_allowgroups: ALL
+sshd_client_alive_count_max: 3
+sshd_client_alive_interval: 0
+sshd_banner: /etc/ssh/sshd_banner

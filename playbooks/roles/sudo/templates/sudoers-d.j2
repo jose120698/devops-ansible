@@ -1,0 +1,6 @@
+## {{ ansible_managed }}
+#
+# Allow the following users access to execute any command without a password
+{% for sudoer in sudo_sudoers %}
+{{ sudoer }}	ALL=(ALL:ALL) NOPASSWD:ALL
+{% endfor %}

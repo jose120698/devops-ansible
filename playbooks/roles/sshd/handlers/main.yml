@@ -1,0 +1,9 @@
+---
+## This file handles ssh service notifications
+- name: restart sshd
+  service: name=sshd state=restarted
+  tags: sshd
+
+- name: reload sshd
+  service: name=sshd state=reloaded
+  tags: sshd

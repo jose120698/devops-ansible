@@ -1,0 +1,32 @@
+---
+- name: sudoers config
+  template: >
+    src=sudoers-d.j2
+    dest=/etc/sudoers.d/sudoers
+    owner=root
+    group=root
+    mode=0440
+    backup=yes
+    validate='visudo -cf %s'
+  tags:
+    - sudo
+
+- name: create sudoers base config
+  template: >
+    src=sudoers-base.j2
+    dest=/etc/sudoers
+    owner=root
+    group=root
+    mode=0440
+    backup=yes
+    validate='visudo -cf %s'
+  tags:
+    - sudo
+
+# - name: tty-less sudo
+#   lineinfile: dest=/etc/sudoers
+#               state=absent
+#               regexp='^Defaults(\s+)requiretty(\s*)$'
+#               validate='visudo -cf %s'
+#   tags:
+#     - common

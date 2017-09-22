@@ -1,0 +1,38 @@
+---
+- name: sshd install
+  yum: pkg=openssh state=present
+  when: ansible_os_family == "RedHat"
+  tags: sshd
+
+- name: check sshd banner file
+  stat: >
+    path={{ sshd_banner }}
+  register: sshd_banner_file
+  always_run: True
+  tags: sshd
+
+- name: sshd banner
+  file: >
+    path={{ sshd_banner }}
+    state=touch
+    owner=root
+    group=root
+    mode=0644
+  when: not sshd_banner_file.stat.exists
+  tags: sshd
+
+- name: configure sshd
+  template: >
+    src=sshd_config.j2
+    dest=/etc/ssh/sshd_config
+    backup=yes
+    owner=root
+    group=root
+    mode=0644
+  notify: reload sshd
+  tags: sshd
+
+#TODO: Needs to be 'ssh' for Debian
+- name: started and enabled
+  service: name=sshd state=running enabled=yes
+  tags: sshd

@@ -1,0 +1,41 @@
+---
+# must specify env when calling this playbook, which will limit the scope of the run
+- name:  Verify env variable
+  hosts: localhost
+  connection: local
+  become: False
+  gather_facts: False
+  tasks:
+    - name: Check if env defined
+      fail: msg="Variable 'env' must be defined."
+      when: env is not defined
+      tags: always
+    - name: Targetted environment
+      debug: var=env
+      tags: always
+    - name: Ansible user
+      debug: var=ansible_user
+      tags: always
+
+### This play is for tasks which can be run after initial setup (e.g. Most tasks which use ansible sudoing)
+## (e.g., ntp, syslog)
+- name: Ansible Common Play
+  hosts: "{{ env }}"
+  become: True
+  remote_user: "{{ ansible_user }}"
+  tasks:
+    - name: Check mode test 1
+      command: /bin/true
+      register: noop_result
+      tags: always
+    - name: Check mode test 2
+      set_fact: Testing={{ noop_result|skipped }}
+      tags: always
+    - name: Is Ansible running in check mode?
+      debug: msg="Ansible is running in **** CHECK MODE ****"
+      when: Testing
+      tags: always
+  roles:
+    - common
+    - sshd
+    - java

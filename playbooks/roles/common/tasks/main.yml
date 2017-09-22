@@ -1,0 +1,146 @@
+---
+## This contains packages we wish to add to systems in our
+## environment
+
+- name: kill RedHat subscription manager
+  command: rm -rf /etc/yum/pluginconf.d/subscription-manager.conf
+  tags:
+    - common
+
+- name: create swap-file if using vagrant due to low memory
+  command: "{{ item }}"
+  with_items:
+    - "mkdir -p /var/cache/swap/"
+    - "dd if=/dev/zero of /var/cache/swap/swap0 bs=1M count=512"
+    - "chmod 0600 /var/cache/swap/swap0"
+    - "mkswap /var/cache/swap/swap0"
+    - "swapon /var/cache/swap/swap0"
+  when: ansible_user == "vagrant"
+
+## Install our common packages
+- name: install common packages (RedHat)
+  yum: name={{ item }} state=installed
+  with_items: "{{ common_packages }}"
+  when: common_packages is defined
+  tags:
+    - common_yum_install
+    - common
+
+- name: install all common pip packages
+  pip: name={{ item }} state=present
+  with_items: "{{ common_pip_packages }}"
+  when: common_pip_packages is defined
+  tags:
+    - common
+    - common_pip_install
+
+## Check to see if cups is installed.
+- name: cups check
+  command: rpm -q cups
+  register: cups_check
+  changed_when: False
+  tags:
+    - common
+
+## Cups is a printing daemon, it is not needed and can be removed safely.
+## Disable only if it is installed.
+- name: cups disable
+  service: name=cups state=stopped enabled=no
+  when: cups_check|success
+  tags:
+    - common
+
+## Check for samba-winbind
+- name: winbind check
+  command:  rpm -q samba-winbind
+  register: winbind_check
+  changed_when: False
+  tags:
+    - common
+
+## winbind is a service only useful in AD environments.  We can safely
+## disable this service if it is installed.
+- name: winbind disable
+  service: name=winbind state=stopped enabled=no
+  when: winbind_check|success
+  tags:
+    - common
+
+# serial port is enabled for some reason, so disable it
+- name: stop ttyS0
+  command: stop ttyS0
+  changed_when: False
+  tags:
+    - common
+
+- name: disable ttyS0
+  command: >
+    mv -f /etc/init/ttyS0.conf /etc/init/ttyS0.conf.NOT
+    creates=/etc/init/ttyS0.conf.NOT
+  tags:
+    - common
+
+## set hostname
+- name: set hostname
+  hostname: name={{ inventory_hostname }}
+  when: inventory_hostname not in 'vagrant'
+  tags:
+    - common
+
+- name: set /etc/hosts
+  lineinfile:
+    dest: '{{ vm_host_file }}'
+    regexp: '^127\.0\.0\.1[ \t]+localhost'
+    line: '127.0.0.1 localhost {{ inventory_hostname }}'
+    state: present
+  when: inventory_hostname not in 'vagrant'
+  tags:
+    - common
+
+- name: Get timedatectl information
+  command: timedatectl
+  register: timedatectl
+  changed_when: False
+  tags:
+    - common
+
+- name: Set timezone to UTC
+  command: timedatectl set-timezone UTC
+  when: "'Time zone: UTC' not in timedatectl.stdout"
+  tags:
+    - common
+
+- name: Clear previous Ansible user password if exist
+  shell: if [ $(grep -c {{ ansible_user }} /etc/passwd) -eq 1 ]; then sudo passwd -d {{ ansible_user }}; fi
+  tags:
+    - common
+
+- name: Set coredump hard limit
+  lineinfile:
+    dest: /etc/security/limits.conf
+    line: '*                hard    core            0'
+    insertafter: 'EOF'
+    regexp: '.+\s'
+    state: present
+  tags:
+    - common
+
+- name: Disable core dumps by setuid programs
+  sysctl:
+    name: fs.suid_dumpable
+    value: 0
+    sysctl_set: yes
+    state: present
+    reload: yes
+  tags:
+    - common
+
+- name: Stop creation of coredump files for all users
+  lineinfile:
+    dest: /etc/profile
+    line: 'ulimit -S -c 0 > /dev/null 2>&1'
+    insertafter: 'EOF'
+    regexp: '^ulimit.+'
+    state: present
+  tags:
+    - common
