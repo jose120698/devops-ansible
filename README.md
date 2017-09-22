@@ -2,16 +2,16 @@
 This repository serves as our configuration management repository. In order to keep things in order and maintain consistency, there are some conventions which should be followed.
 
 ## Conventions
-1. _Keep this repository client-agnostic._ Do not include any environment or client-specific information in this repository. Store all of your environment and client-specific information in the appropriate inventory repository. This allows us to utilize this code-repository across multiple clients, projects and initiatives.
-2. _Write your Ansible roles and playbooks to be idempotent._ This means that when you run your Ansible multiple times in succession it will not perform any unnecessary actions repeatedly (0 changes).
-3. _Always test your Ansible in Vagrant_ or a disposable environment before issuing a merge request, or merging your branch into master. This ensures that we are not "developing in production" and gives us stability and reliability across our production systems.
-4. _Use feature branching when pushing._ When you push to the Ansible source repository, push your changes to a feature branch, i.e. `gitlab` and then issue a merge request when you are ready to have your code merged. This allows at least 2 sets of eyes on everything that gets added to the Ansible code base.
-5. _Always tag your role tasks with the name of the role._ This allows fine-grained targeting of systems with specific roles and playbooks.
-6. _Never target production systems_ from your local machine, Vagrant or any non-assigned Ansible control nodes or from the command line of a control node. This helps us to ensure that all actions taken against production systems are logged/audited properly; as we orchestrate the execution of Ansible from tools which retain the logs and activities of Ansible.
-7. _Give each task a name_ so that the Ansible execution output is easier to read by humans.
-8. _Never use `ignore_errors`_ unless you absolutely have to.
-9. _Add padding to your variables._ For example, `{{hard_to_read}}` and `{{ easier_to_read }}`.
-10. _Use Pascal Case for boolean._ Instead of `true` use `True`.
+1. __Keep this repository client-agnostic.__ Do not include any environment or client-specific information in this repository. Store all of your environment and client-specific information in the appropriate inventory repository. This allows us to utilize this code-repository across multiple clients, projects and initiatives.
+2. __Write your Ansible roles and playbooks to be idempotent.__ This means that when you run your Ansible multiple times in succession it will not perform any unnecessary actions repeatedly (0 changes).
+3. __Always test your Ansible in Vagrant__ or a disposable environment before issuing a merge request, or merging your branch into master. This ensures that we are not "developing in production" and gives us stability and reliability across our production systems.
+4. __Use feature branching when pushing.__ When you push to the Ansible source repository, push your changes to a feature branch, i.e. `gitlab` and then issue a merge request when you are ready to have your code merged. This allows at least 2 sets of eyes on everything that gets added to the Ansible code base.
+5. __Always tag your role tasks with the name of the role.__ This allows fine-grained targeting of systems with specific roles and playbooks.
+6. __Never target production systems__ from your local machine, Vagrant or any non-assigned Ansible control nodes or from the command line of a control node. This helps us to ensure that all actions taken against production systems are logged/audited properly; as we orchestrate the execution of Ansible from tools which retain the logs and activities of Ansible.
+7. __Give each task a name__ so that the Ansible execution output is easier to read by humans.
+8. __Never use `ignore_errors`__ unless you absolutely have to.
+9. __Add padding to your variables.__ For example, `{{hard_to_read}}` and `{{ easier_to_read }}`.
+10. __Use Pascal Case for boolean.__ Instead of `true` use `True`.
 
 # Ansible Config Tree
  - `inventory-vagrant/`                -- Directory of static inventory files and variable files for `Vagrant`
@@ -62,7 +62,7 @@ This repository serves as our configuration management repository. In order to k
 4. Run the following command inside the Vagrant machine: `cd /vagrant; ansible-playbook site.yml -e "env=vagrant"` to execute Ansible. You can execute this command each time you want to test your changes. You may also run Ansible in "check mode" by adding the `--check` parameter to the end, like so: `cd /vagrant; ansible-playbook site.yml -e "env=vagrant" --check`
 5. You can modify the `Vagrantfile` inside the repository to add any additional ports you need forwarded, after doing so you must re-provision your machine. Please see the Vagrant docs for further information
 
-*_Uncomment `vagrant` in the inventory file (inventory-vagrant/inventory/vagrant) under any product you'd like to install_*
+__Uncomment `vagrant` in the inventory file (inventory-vagrant/inventory/vagrant) under any product you'd like to install__
 
 # Notes
  - You can store your custom roles in `/etc/ansible/roles` and they will be automatically picked up
