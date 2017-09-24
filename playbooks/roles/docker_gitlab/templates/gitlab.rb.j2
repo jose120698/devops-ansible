@@ -36,15 +36,15 @@
 ## gitlab.yml configuration
 ##! Docs: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/gitlab.yml.md
 ################################################################################
-# gitlab_rails['gitlab_ssh_host'] = 'ssh.host_example.com'
+gitlab_rails['gitlab_ssh_host'] = '{{ docker_gitlab_gitlab_ssh_host }}'
 # gitlab_rails['time_zone'] = 'UTC'
 
 ### Email Settings
-# gitlab_rails['gitlab_email_enabled'] = true
-# gitlab_rails['gitlab_email_from'] = 'example@example.com'
-# gitlab_rails['gitlab_email_display_name'] = 'Example'
-# gitlab_rails['gitlab_email_reply_to'] = 'noreply@example.com'
-# gitlab_rails['gitlab_email_subject_suffix'] = ''
+gitlab_rails['gitlab_email_enabled'] = {{ docker_gitlab_gitlab_email_enabled }}
+gitlab_rails['gitlab_email_from'] = '{{ docker_gitlab_gitlab_email_from }}'
+gitlab_rails['gitlab_email_display_name'] = '{{ docker_gitlab_gitlab_email_display_name }}'
+gitlab_rails['gitlab_email_reply_to'] = '{{ docker_gitlab_gitlab_email_reply_to }}'
+gitlab_rails['gitlab_email_subject_suffix'] = '{{ docker_gitlab_gitlab_email_subject_suffix }}'
 
 ### GitLab user privileges
 # gitlab_rails['gitlab_default_can_create_group'] = true

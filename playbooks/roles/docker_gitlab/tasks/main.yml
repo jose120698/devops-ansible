@@ -1,9 +1,33 @@
 ---
+- name: Create Gitlab data directories
+  file:
+    state: directory
+    path: '{{ item }}'
+    owner: root
+    group: root
+  with_items:
+    - '/project/docker/gitlab/config'
+    # - '/project/docker/gitlab/data'
+    # - '/project/docker/gitlab/logs'
+  tags:
+    - docker_gitlab
+
+- name: Configure Gitlab
+  template:
+    src: gitlab.rb.j2
+    dest: /project/docker/gitlab/config/gitlab.rb
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart Gitlab
+  tags:
+    - docker_gitlab
+
 - name: Create a Gitlab container
   docker_container:
-    name: web
+    name: '{{ docker_gitlab_name }}'
     image: 'gitlab/{{ docker_gitlab_image }}'
-    restart: True
+    # restart: True
     hostname: '{{ docker_gitlab_hostname }}'
     env:
       GITLAB_OMNIBUS_CONFIG: |

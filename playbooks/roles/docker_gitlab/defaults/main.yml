@@ -1,4 +1,11 @@
 ---
+docker_gitlab_name: 'web'
 docker_gitlab_image: 'gitlab-ee:latest'
-docker_gitlab_hostname: 'gitlab.devops.gic.ericsson.se'
-docker_gitlab_external_url: 'http://gitlab.devops.gic.ericsson.se'
+docker_gitlab_hostname: 'localhost'
+docker_gitlab_external_url: 'http://{{ docker_gitlab_hostname }}'
+docker_gitlab_gitlab_ssh_host: '{{ docker_gitlab_hostname }}:2222'
+docker_gitlab_gitlab_email_enabled: 'true'
+docker_gitlab_gitlab_email_from: 'example@example.com'
+docker_gitlab_gitlab_email_display_name: 'Example'
+docker_gitlab_gitlab_email_reply_to: 'noreply@example.com'
+docker_gitlab_gitlab_email_subject_suffix: ''
