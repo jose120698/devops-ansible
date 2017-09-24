@@ -1,14 +1,7 @@
 ---
 - name: Installs a Consul agent
   vars:
-    consul_install_nginx: "false"
-    consul_install_nginx_config: "false"
     consul_is_server: "false"
-    consul_datacenter: "test"
-    consul_bootstrap: "true"
-    consul_bind_address: "{{ ansible_default_ipv4['address'] }}"
-    consul_use_upstart: false
-    consul_use_systemd: true
   include_role:
     name: 3pp-roles/savagegus.ansible-consul
   tags: consul-agent
