@@ -1,1 +1,19 @@
 ---
+- name: Create a Gitlab container
+  docker_container:
+    name: web
+    image: 'gitlab/{{ docker_gitlab_image }}'
+    restart: True
+    hostname: '{{ docker_gitlab_hostname }}'
+    env:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '{{ docker_gitlab_external_url }}'
+    published_ports:
+      - '80:80'
+      - '2222:22'
+    volumes:
+      - '/project/docker/gitlab/config:/etc/gitlab'
+      - '/project/docker/gitlab/logs:/var/log/gitlab'
+      - '/project/docker/gitlab/data:/var/opt/gitlab'
+  tags:
+    - docker_gitlab

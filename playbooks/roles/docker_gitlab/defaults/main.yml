@@ -1,1 +1,4 @@
 ---
+docker_gitlab_image: 'gitlab-ee:latest'
+docker_gitlab_hostname: 'gitlab.devops.gic.ericsson.se'
+docker_gitlab_external_url: 'http://gitlab.devops.gic.ericsson.se'
