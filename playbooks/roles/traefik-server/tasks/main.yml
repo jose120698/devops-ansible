@@ -1,3 +1,5 @@
 ---
-- include_role:
+- name: Installs a Consul server
+  include_role:
     name: 3pp-roles/kibatic.traefik
+  tags: traefik-server

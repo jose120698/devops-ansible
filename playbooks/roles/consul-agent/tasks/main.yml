@@ -1,5 +1,4 @@
 ---
-# this role installs a Consul agent
 - name: Installs a Consul agent
   vars:
     consul_install_nginx: "false"
@@ -12,3 +11,4 @@
     consul_use_systemd: true
   include_role:
     name: 3pp-roles/savagegus.ansible-consul
+  tags: consul-agent
