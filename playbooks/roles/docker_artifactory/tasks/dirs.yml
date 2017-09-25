@@ -1,0 +1,7 @@
+---
+- name: Create necessary directories for Artifactory
+  file:
+    path: /project/docker/artifactory
+    state: directory
+    owner: root
+    mode: 0755
