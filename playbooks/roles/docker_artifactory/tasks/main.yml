@@ -1,2 +1,4 @@
 ---
 - include: dirs.yml
+- include: postgres.yml
+- include: artifactory.yml

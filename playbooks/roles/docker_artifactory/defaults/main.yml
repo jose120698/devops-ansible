@@ -1,1 +1,3 @@
 ---
+docker_artifactory_name: 'artifactory' #check what this should be (web, app, db, etc)
+docker_postgres_name: 'postgressql' #check what this should be (web, app, db, etc)

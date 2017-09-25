@@ -4,4 +4,17 @@
     path: /project/docker/artifactory
     state: directory
     owner: root
+    group: root
     mode: 0755
+  tags:
+    - docker_artifactory
+
+- name: Create necessary directories for Postgres
+  file:
+    path: /project/docker/postrgresql
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - docker_postgres

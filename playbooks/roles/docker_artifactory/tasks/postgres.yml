@@ -1,0 +1,22 @@
+- name: Create PostgresSQL in Docker Container
+  docker_container:
+    name: '{{ docker_postgres_name }}'
+    image: docker.bintray.io/postgres:9.5.2
+    # container_name: postgresql #do we need this...comes from docker_compose file
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_DB=artifactory
+     # The following must match the DB_USER and DB_PASSWORD values passed to Artifactory
+     - POSTGRES_USER=artifactory
+     - POSTGRES_PASSWORD=devops00
+    volumes:
+     - /project/docker/postgresql:/var/lib/postgresql/data
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+  tags:
+    - docker_postgres

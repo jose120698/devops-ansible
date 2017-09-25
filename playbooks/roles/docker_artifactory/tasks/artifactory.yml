@@ -1,0 +1,27 @@
+- name: Create Artifactory in Docker Container
+  docker_container:
+    name: '{{ docker_artifactory_name }}'
+    image: 'docker.bintray.io/jfrog/artifactory-oss:5.4.6'
+    restart: always
+    ports:
+      - 8888:8081 #change this as needed
+    depends_on:
+      - postgresql
+    links:
+      - postgresql
+    volumes:
+      - /project/docker/artifactory:/var/opt/jfrog/artifactory
+    environment:
+      - DB_TYPE=postgresql
+      # The following must match the POSTGRE_USER and POSTGRES_PASSWORD values passed to PostgresSQL
+      - DB_USER=artifactory
+      - DB_PASSWORD=devops00
+      # Add extra Java options by uncommenting the following line
+      #- EXTRA_JAVA_OPTIONS=Xmx4g
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+  tags:
+    - docker_artifactory
