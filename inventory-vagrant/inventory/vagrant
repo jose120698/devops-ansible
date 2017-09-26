@@ -1,2 +1,5 @@
 [vagrant]
 vagrant ansible_connection=local
+
+[docker_artifactory]
+vagrant
