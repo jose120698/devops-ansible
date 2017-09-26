@@ -30,8 +30,10 @@ common_packages:
 # Common Consul settings
 consul_install_nginx: "false"
 consul_install_nginx_config: "false"
-consul_datacenter: "devops-core-lab"
 consul_bootstrap: "true"
 consul_bind_address: "{{ ansible_default_ipv4['address'] }}"
 consul_use_upstart: false
 consul_use_systemd: true
+
+# Traefik settings
+traefik_template: traefik-custom.toml

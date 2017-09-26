@@ -27,6 +27,6 @@
     - sshd
     - java
 
-- include: HostType-consul-server.yml
-- include: HostType-consul-agent.yml
-- include: HostType-traefik-server.yml
+- include: HostType-consul_server.yml
+- include: HostType-consul_agent.yml
+- include: HostType-traefik.yml

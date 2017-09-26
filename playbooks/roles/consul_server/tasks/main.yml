@@ -3,5 +3,5 @@
   vars:
     consul_is_server: "true"
   include_role:
-    name: 3pp-roles/savagegus.ansible-consul
-  tags: consul-server
+    name: consul
+  tags: consul_server
