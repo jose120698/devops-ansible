@@ -1,0 +1,7 @@
+---
+- name: Installs a Consul agent
+  vars:
+    consul_is_server: "false"
+  include_role:
+    name: consul
+  tags: consul_agent

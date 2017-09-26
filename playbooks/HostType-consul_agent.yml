@@ -1,0 +1,6 @@
+---
+- name: Ansible HostType Consul Agent Play
+  hosts: "{{ env }}:&consul_agent"
+  become: True
+  roles:
+    - consul_agent
