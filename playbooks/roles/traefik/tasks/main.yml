@@ -10,6 +10,8 @@
   notify:
     - Reload systemd daemon
     - Restart traefik
+  tags:
+    - traefik
 
 - name: Ensure install & config directory exists
   file:
@@ -17,6 +19,8 @@
     state: directory
   with_items:
     - "{{ traefik_install_dir }}"
+  tags:
+    - traefik
 
 - name: Download Traefik binary
   get_url:
@@ -28,6 +32,8 @@
   with_items:
     - url: "{{ traefik_binary_url }}"
       dest: "{{ traefik_bin_path }}"
+  tags:
+    - traefik
 
 - name: Copy traefik config file
   template:
@@ -38,9 +44,13 @@
     mode: 0744
   notify:
     - Restart traefik
+  tags:
+    - traefik
 
 - name: Ensure traefik service is enabled and running
   service:
     name: traefik
     state: started
     enabled: yes
+  tags:
+    - traefik

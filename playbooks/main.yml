@@ -29,4 +29,4 @@
 
 - include: HostType-consul-server.yml
 - include: HostType-consul-agent.yml
-- include: HostType-traefik-server.yml
+- include: HostType-traefik.yml

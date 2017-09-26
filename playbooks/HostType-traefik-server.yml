@@ -1,6 +1,0 @@
----
-- name: Ansible HostType Traefik Server Play
-  hosts: "{{ env }}:&traefik-servers"
-  become: True
-  roles:
-    - traefik-server

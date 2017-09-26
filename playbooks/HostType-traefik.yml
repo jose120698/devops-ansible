@@ -1,0 +1,6 @@
+---
+- name: Ansible HostType Traefik Play
+  hosts: "{{ env }}:&traefik"
+  become: True
+  roles:
+    - traefik
