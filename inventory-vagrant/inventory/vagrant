@@ -1,2 +1,11 @@
 [vagrant]
 vagrant ansible_connection=local
+
+[consul_server]
+vagrant
+
+[consul_agent]
+vagrant
+
+[traefik]
+vagrant

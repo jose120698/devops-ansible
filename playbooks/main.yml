@@ -26,3 +26,7 @@
     - common
     - sshd
     - java
+
+- include: HostType-consul_server.yml
+- include: HostType-consul_agent.yml
+- include: HostType-traefik.yml
