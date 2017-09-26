@@ -1,5 +1,5 @@
 ---
-# must specify env when calling this playbook, which will limit the scope of the run
+# Must specify env when calling this playbook, which will limit the scope of the run
 - name:  Verify env variable
   hosts: localhost
   connection: local
@@ -17,7 +17,7 @@
       debug: var=ansible_user
       tags: always
 
-### This play is for tasks which can be run after initial setup (e.g. Most tasks which use ansible sudoing)
+# This play is for tasks which can be run after initial setup (e.g. Most tasks which use ansible sudoing)
 ## (e.g., ntp, syslog)
 - name: Ansible Common Play
   hosts: "{{ env }}"
@@ -27,6 +27,10 @@
     - sshd
     - java
 
+# Include your playbooks below, order may be important
+## Note that this is using the intersection of the HostType/Docker and env groups.
+- include: Docker-gitlab.yml
+- include: Docker-jenkins.yml
 - include: HostType-consul_server.yml
 - include: HostType-consul_agent.yml
 - include: HostType-traefik.yml

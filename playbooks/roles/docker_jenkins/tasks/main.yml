@@ -1,0 +1,25 @@
+---
+- name: Create Jenkins data directories
+  file:
+    state: directory
+    path: '{{ item }}'
+    owner: root
+    group: root
+    # Jenkins runs as 'jenkins' user in container
+    mode: 0777
+  with_items: '{{ docker_jenkins_data_directories }}'
+  tags:
+    - docker_jenkins
+
+- name: Create a Jenkins container
+  docker_container:
+    name: '{{ docker_jenkins_name }}'
+    image: '{{ docker_jenkins_image }}'
+    # restart: True
+    hostname: '{{ docker_jenkins_hostname }}'
+    env:
+      JAVA_OPTS: '-Dhudson.footerURL={{ docker_jenkins_external_url }}'
+    published_ports: '{{ docker_jenkins_ports }}'
+    volumes: '{{ docker_jenkins_volumes }}'
+  tags:
+    - docker_jenkins

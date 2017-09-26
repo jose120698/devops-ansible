@@ -37,3 +37,8 @@ consul_use_systemd: true
 
 # Traefik settings
 traefik_template: traefik-custom.toml
+
+# Jenkins settings
+docker_jenkins_ports:
+  - '80:8080'
+  - '4440:5000'

@@ -94,18 +94,19 @@
   tags:
     - common
 
-- name: Get timedatectl information
-  command: timedatectl
-  register: timedatectl
-  changed_when: False
-  tags:
-    - common
-
-- name: Set timezone to UTC
-  command: timedatectl set-timezone UTC
-  when: "'Time zone: UTC' not in timedatectl.stdout"
-  tags:
-    - common
+## Temporarily disabled due to Rundeck Ansible execution. RCA TBD
+# - name: Get timedatectl information
+#   command: timedatectl
+#   register: timedatectl
+#   changed_when: False
+#   tags:
+#     - common
+#
+# - name: Set timezone to UTC
+#   command: timedatectl set-timezone UTC
+#   when: "'Time zone: UTC' not in timedatectl.stdout"
+#   tags:
+#     - common
 
 - name: Clear Ansible user password if exist
   shell: passwd -d {{ ansible_user }}
