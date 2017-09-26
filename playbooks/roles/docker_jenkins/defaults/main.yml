@@ -1,0 +1,12 @@
+---
+docker_jenkins_name: 'jenkins'
+docker_jenkins_image: 'jenkins/jenkins:lts'
+docker_jenkins_hostname: 'localhost'
+docker_jenkins_external_url: 'http://{{ docker_jenkins_hostname }}'
+docker_jenkins_volumes:
+  - '/project/docker/jenkins:/var/jenkins_home'
+docker_jenkins_data_directories:
+  - '/project/docker/jenkins'
+docker_jenkins_ports:
+  - '8080:8080'
+  - '5000:5000'

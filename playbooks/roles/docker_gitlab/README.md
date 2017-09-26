@@ -5,6 +5,7 @@ This role serves to spin up and manage Gitlab Docker containers.
 1. Add your Gitlab configurations to Ansible inventory, use `playbooks/roles/docker_gitlab/defaults/main.yml` as a reference.
 2. Add your host to the `[docker_gitlab]` host group in Ansible inventory
 3. Execute Ansible.
+<<<<<<< HEAD
 
 # GitLab Docker images
 https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/docker/README.md
@@ -469,3 +470,5 @@ $ sudo setfacl -mR default:group:docker:rwx /srv/gitlab
 If your problem is not listed here please see [getting help](https://about.gitlab.com/getting-help/) for the support channels.
 
 These docker images are officially supported by GitLab Inc. and should always be up to date.
+=======
+>>>>>>> 23d9965007f39f10f8e8ee64d065f91bdcdf5d1a
