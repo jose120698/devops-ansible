@@ -1,11 +1,11 @@
-[vagrant-hosts]
-vagrant ansible_connection=local
+[vagrant]
+vagrant-vm ansible_connection=local
 
-#[consul-servers]
-#vagrant ansible_connection=local
+[consul-servers]
+vagrant-vm ansible_connection=local
 
-#[consul-agents]
-#vagrant ansible_connection=local
+[consul-agents]
+vagrant-vm ansible_connection=local
 
-#[traefik-servers]
-#vagrant ansible_connection=local
+[traefik-servers]
+vagrant-vm ansible_connection=local

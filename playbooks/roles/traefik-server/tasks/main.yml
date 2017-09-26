@@ -1,5 +1,9 @@
 ---
-- name: Installs a Consul server
+- name: Installs a Traefik server
+  vars:
+    # Provide an override template
+    # 3pp-roles/kibatic.traefik role will search this parent job's templates first [tested]
+    traefik_template: traefik-custom.toml
   include_role:
     name: 3pp-roles/kibatic.traefik
   tags: traefik-server
