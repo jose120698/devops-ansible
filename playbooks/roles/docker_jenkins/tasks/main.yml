@@ -5,7 +5,9 @@
     path: '{{ item }}'
     owner: root
     group: root
-  with_items: '{{ docker_jenkins_volumes }}'
+    # Jenkins runs as 'jenkins' user in container
+    mode: 0777
+  with_items: '{{ docker_jenkins_data_directories }}'
   tags:
     - docker_jenkins
 

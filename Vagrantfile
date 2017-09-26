@@ -4,10 +4,14 @@
 machines = {
   'vagrant' => {
     'box' => 'travisrowland/centos7',
+    # VM => HOST
     'local_ports' => {
+      # Docker Jenkins
       '80' => '8880',
       # Rundeck
       '4440' => '4440',
+      # Docker Jenkins
+      '5000' => '5000',
     },
   },
 }
