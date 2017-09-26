@@ -1,8 +1,17 @@
 ---
 docker_gitlab_name: 'web'
-docker_gitlab_image: 'gitlab-ee:latest'
+docker_gitlab_image: 'gitlab/gitlab-ee:latest'
 docker_gitlab_hostname: 'localhost'
-docker_gitlab_external_url: 'http://{{ docker_gitlab_hostname }}'
+docker_gitlab_data_directories:
+  - '/project/docker/gitlab/config'
+docker_gitlab_volumes:
+  - '/project/docker/gitlab/config:/etc/gitlab'
+  - '/project/docker/gitlab/logs:/var/log/gitlab'
+  - '/project/docker/gitlab/data:/var/opt/gitlab'
+docker_gitlab_ports:
+  - '80:80'
+  - '2222:22'
+docker_gitlab_gitlab_external_url: 'http://{{ docker_gitlab_hostname }}'
 docker_gitlab_gitlab_ssh_host: '{{ docker_gitlab_hostname }}:2222'
 docker_gitlab_gitlab_email_enabled: 'true'
 docker_gitlab_gitlab_email_from: 'example@example.com'

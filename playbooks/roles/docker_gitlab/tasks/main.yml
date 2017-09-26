@@ -5,10 +5,7 @@
     path: '{{ item }}'
     owner: root
     group: root
-  with_items:
-    - '/project/docker/gitlab/config'
-    # - '/project/docker/gitlab/data'
-    # - '/project/docker/gitlab/logs'
+  with_items: '{{ docker_gitlab_data_directories }}'
   tags:
     - docker_gitlab
 
@@ -26,18 +23,13 @@
 - name: Create a Gitlab container
   docker_container:
     name: '{{ docker_gitlab_name }}'
-    image: 'gitlab/{{ docker_gitlab_image }}'
+    image: '{ docker_gitlab_image }}'
     # restart: True
     hostname: '{{ docker_gitlab_hostname }}'
     env:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url '{{ docker_gitlab_external_url }}'
-    published_ports:
-      - '80:80'
-      - '2222:22'
-    volumes:
-      - '/project/docker/gitlab/config:/etc/gitlab'
-      - '/project/docker/gitlab/logs:/var/log/gitlab'
-      - '/project/docker/gitlab/data:/var/opt/gitlab'
+        external_url '{{ docker_gitlab_gitlab_external_url }}'
+    published_ports: '{{ docker_gitlab_ports }}'
+    volumes: '{{ docker_gitlab_volumes }}'
   tags:
     - docker_gitlab
