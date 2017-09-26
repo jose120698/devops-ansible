@@ -17,4 +17,4 @@ vagrant ansible_connection=local
 #vagrant
 
 [docker_sonarqube]
-vagrant
+#vagrant
