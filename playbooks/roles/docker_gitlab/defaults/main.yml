@@ -1,5 +1,5 @@
 ---
-docker_gitlab_name: 'web'
+docker_gitlab_name: 'gitlab'
 docker_gitlab_image: 'gitlab/gitlab-ee:latest'
 docker_gitlab_hostname: 'localhost'
 docker_gitlab_data_directories:
