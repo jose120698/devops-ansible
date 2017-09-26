@@ -1,0 +1,9 @@
+---
+docker_sonarqube_name: 'sonarqube'
+docker_sonarqube_image: 'sonarqube:latest'
+docker_sonarqube_hostname: 'sonarqube'
+docker_sonarqube_ports:
+  - '9000:9000'
+  - '2222:22'
+docker_sonarqube_sonarqube_external_url: 'http://{{ docker_sonarqube_hostname }}'
+docker_sonarqube_sonarqube_ssh_host: '{{ docker_sonarqube_hostname }}:2222'
