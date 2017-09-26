@@ -5,13 +5,13 @@ vagrant ansible_connection=local
 
 ### HostType
 [docker_gitlab]
-vagrant
+#vagrant
 
 [consul_server]
-vagrant
+#vagrant
 
 [consul_agent]
-vagrant
+#vagrant
 
 [traefik]
-vagrant
+#vagrant
