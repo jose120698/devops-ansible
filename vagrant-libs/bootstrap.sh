@@ -9,7 +9,7 @@ pip install -U pip
 echo '### Install python virtualenv ###'
 pip install virtualenv
 
-echo '### Install docker-py'
+echo '### Install python docker-py ###'
 pip install docker-py
 
 echo '### Install Vim ###'

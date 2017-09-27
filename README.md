@@ -18,10 +18,12 @@ This repository serves as our configuration management repository. In order to k
  - `inventory-vagrant/`                -- Directory of static inventory files and variable files for `Vagrant`
  - `inventory-vagrant/group_vars/`     -- Group variables
  - `inventory-vagrant/inventory/`      -- Directory of static inventory files for `Vagrant`
- - `library`                           -- Custom `Ansible modules`
+ - `library/`                          -- Custom `Ansible modules`
+ - `libs/`                             -- Custom libraries and supporting scripts
+ - `libs/rundeck-vagrant.yml`          -- Example rundeck job for executing Ansible with Rundeck in Vagrant
  - `playbooks/`                        -- Recipes for configuration and appropriate related actions
  - `playbooks/roles/`                  -- Roles and modules under them for which we act upon within Ansible
- - `vagrant-libs`                      -- Required files for `Vagrant` provisioning
+ - `vagrant-libs/`                     -- Required files for `Vagrant` provisioning
  - `.gitignore`                        -- Git ignore file.
  - `ansible.cfg`                       -- Ansible program configuration variables.
                                        -- This file should not be modified under most circumstances.
@@ -39,17 +41,49 @@ This repository serves as our configuration management repository. In order to k
  - `env`  -- Host environment to target
  - Check Ansible documentation for additional global variables
 
+## HostType and env Definition
+The combination of __HostType__ and __env__ is an internal organization scheme that I have developed by utilizing the flexibility of Ansible in order to assist the grouping of hosts together as well as targeting Ansible playbook execution to a limited scope of hosts. This allows us to run the same `site.yml` playbook every time, however we can granularly target hosts all the way down to specific tasks if desired. The result of this is much easier automation of Ansible playbook executions as well as removing the burden of needing to know which exact playbook you need to run to perform your desired actions against the infrastructure.
+
+__HostType__ refers to the playbook that you want executed against that host each and every time Ansible is targeted against that host. (i.e. `HostType-gitlab`)
+
+__env__ refers to the environment in which you want to target.
+
+The way it works is, when Ansible executes it creates an intersection between those 2 host groups (`HostType` and `env`) and only executes playbooks where that intersection occurs. For example, if you wanted to install Gitlab on a host in `dev` you would simply add your host (i.e. `dev1.example.com 10.10.10.10`) to the following host groups in Ansible inventory: `gitlab` and `dev`. From there you could execute Ansible using the following command: `ansible-playbook site.yml -e "env=dev" -t "gitlab"` and the result would be that Ansible would install Gitlab on the `dev1.example.com` host in the `dev` environment, as well as any other hosts which are defined both in the `gitlab` and `dev` host groups simultaneously.
+
 ## Create New Roles and Playbooks
-1. Create a new playbook in `playbooks` prefixed with `HostType-`, for example a Gitlab playbook would be named `HostType-gitlab.yml`
-2. Structure your playbook content like the following example:
-```
----
-- name: Ansible HostType gitlab Play
-  hosts: "{{ env }}:&gitlab"
-  become: True
-  roles:
-    - gitlab
-```
+There are 2 types of Ansible playbooks which we are currently developing:
+1. Standard playbooks which perform actions directly on a host
+2. Docker container based playbooks which manage Docker containers on a host
+
+The reasoning for the distinction between `standard` and `Docker container` based playbooks is because we may have a service which is installed 2 different ways.
+1. As a standard service running on a host
+2. As a Docker container running on a host
+
+The result of this is, we may have 2 roles and playbooks defined for the same service; one for the standard service and another one for the Docker service. If that is the case, we would have a collision of role names. This methodology avoids such scenarios.
+
+### Please follow these instructions to create your new playbooks:
+1. Create a new playbook in `playbooks` prefixed with one of the following prefixes:
+   1. `HostType-` for standard playbooks (i.e. `HostType-gitlab.yml`)
+   2. `Docker-` for Docker container based playbooks (i.e. `Docker-gitlab.yml`)
+2. Structure your playbook content like the following examples:
+   1. For standard playbooks:
+      ```
+      ---
+      - name: Ansible HostType gitlab Play
+        hosts: "{{ env }}:&gitlab"
+        become: True
+        roles:
+          - gitlab
+      ```
+    2. For Docker container based playbooks (note the role name is `docker_gitlab`):
+      ```
+      ---
+      - name: Ansible HostType docker_gitlab Play
+        hosts: "{{ env }}:&docker_gitlab"
+        become: True
+        roles:
+          - gitlab
+      ```
 3. Include your new playbook at the end of `playbooks/main.yml`
    * `- include: HostType-gitlab.yml`
 4. Duplicate the `playbooks/roles/role-skel` directory and follow the instructions in `playbooks/roles/role-skel/README.md` to create your role
@@ -61,12 +95,10 @@ This repository serves as our configuration management repository. In order to k
 2. Inside the root of the repository, on your command line, type: `vagrant up` to bring up the Vagrant machine
 3. After the Vagrant machine comes up, type: `vagrant ssh` to ssh into the Vagrant machine
 4. Run the following command inside the Vagrant machine: `cd /vagrant; ansible-playbook site.yml -e "env=vagrant"` to execute Ansible. You can execute this command each time you want to test your changes. You may also run Ansible in "check mode" by adding the `--check` parameter to the end, like so: `cd /vagrant; ansible-playbook site.yml -e "env=vagrant" --check`
-5. You can modify the `Vagrantfile` inside the repository to add any additional ports you need forwarded, after doing so you must re-provision your machine. Please see the Vagrant docs for further information
+5. You can modify the `Vagrantfile` inside the repository to add any additional ports you need forwarded, after doing so you must reload your Vagrant machine (`vagrant reload`) to pick up the new changes. Please see the Vagrant docs for further information
 
 __Uncomment `vagrant` in the inventory file (inventory-vagrant/inventory/vagrant) under any product you'd like to install__
 
 # Hepful Tips
 - Add `-vvvv` to your Ansible execution to get extremely verbose output
-
-# Notes
- - You can store your custom roles in `/etc/ansible/roles` and they will be automatically picked up
+- You are able to store your custom roles (for testing purposes) in `/etc/ansible/roles` and they will be automatically picked up (if you don't want to commit them to the repository)

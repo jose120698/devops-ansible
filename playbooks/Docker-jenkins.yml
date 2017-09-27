@@ -1,0 +1,6 @@
+---
+- name: Ansible HostType docker_jenkins Play
+  hosts: "{{ env }}:&docker_jenkins"
+  become: True
+  roles:
+    - docker_jenkins
