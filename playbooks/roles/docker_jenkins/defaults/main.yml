@@ -2,6 +2,8 @@
 docker_jenkins_name: 'jenkins'
 docker_jenkins_image: 'jenkins/jenkins:lts'
 docker_jenkins_hostname: 'localhost'
+docker_jenkins_env:
+  JAVA_OPTS: '-Dhudson.footerURL={{ docker_jenkins_external_url }}'
 docker_jenkins_external_url: 'http://{{ docker_jenkins_hostname }}'
 docker_jenkins_volumes:
   - '/project/docker/jenkins:/var/jenkins_home'
