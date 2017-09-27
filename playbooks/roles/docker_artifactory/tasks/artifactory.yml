@@ -7,20 +7,20 @@
       - 8888:8081 #change this as needed
     #depends_on:
     #  - postgresql
-    links:
-      - postgresql
+    #links:
+    #  - postgresql
     volumes:
       - /project/docker/artifactory:/var/opt/jfrog/artifactory
-    env: #changed from environment to env for ansible
-      - DB_TYPE: postgresql
+    #env: #changed from environment to env for ansible
+    #  DB_TYPE: postgresql
       # The following must match the POSTGRE_USER and POSTGRES_PASSWORD values passed to PostgresSQL
-      - DB_USER: artifactory
-      - DB_PASSWORD: devops00
+    #  DB_USER: artifactory
+    #  DB_PASSWORD: devops00
       # Add extra Java options by uncommenting the following line
       #- EXTRA_JAVA_OPTIONS=Xmx4g
-    ulimits:
-      - "nproc=65535"
-      - "nofile=32000:40000"
-  notify: Restart Artifactory
+    #ulimits:
+    #  - "nproc=65535"
+    #  - "nofile=32000:40000"
+  #notify: Restart Artifactory
   tags:
     - docker_artifactory
