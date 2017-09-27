@@ -17,8 +17,7 @@
     image: '{{ docker_jenkins_image }}'
     # restart: True
     hostname: '{{ docker_jenkins_hostname }}'
-    env:
-      JAVA_OPTS: '-Dhudson.footerURL={{ docker_jenkins_external_url }}'
+    env: '{{ docker_jenkins_env }}'
     published_ports: '{{ docker_jenkins_ports }}'
     volumes: '{{ docker_jenkins_volumes }}'
   tags:

@@ -1,5 +1,5 @@
-# docker_gitlab
-This role serves to spin up and manage Gitlab Docker containers.
+# docker_jenkins
+This role serves to spin up and manage Jenkins Docker containers.
 
 ## How To Use
 1. Add your Jenkins configurations to Ansible inventory, use `playbooks/roles/docker_jenkins/defaults/main.yml` as a reference.
