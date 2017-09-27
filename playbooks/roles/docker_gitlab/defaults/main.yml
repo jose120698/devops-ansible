@@ -2,6 +2,9 @@
 docker_gitlab_name: 'gitlab'
 docker_gitlab_image: 'gitlab/gitlab-ee:latest'
 docker_gitlab_hostname: 'localhost'
+docker_gitlab_env:
+  GITLAB_OMNIBUS_CONFIG: |
+    external_url '{{ docker_gitlab_gitlab_external_url }}'
 docker_gitlab_data_directories:
   - '/project/docker/gitlab/config'
 docker_gitlab_volumes:

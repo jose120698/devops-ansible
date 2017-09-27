@@ -26,9 +26,7 @@
     image: '{{ docker_gitlab_image }}'
     # restart: True
     hostname: '{{ docker_gitlab_hostname }}'
-    env:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url '{{ docker_gitlab_gitlab_external_url }}'
+    env: '{{ docker_gitlab_env }}'
     published_ports: '{{ docker_gitlab_ports }}'
     volumes: '{{ docker_gitlab_volumes }}'
   tags:
