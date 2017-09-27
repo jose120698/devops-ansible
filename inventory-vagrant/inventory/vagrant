@@ -5,7 +5,7 @@ vagrant ansible_connection=local
 
 ### HostType
 [docker_postgres]
-vagrant
+#vagrant
 
 [docker_gitlab]
 #vagrant
