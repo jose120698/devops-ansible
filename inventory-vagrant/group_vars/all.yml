@@ -42,3 +42,11 @@ traefik_template: traefik-custom.toml
 docker_jenkins_ports:
   - '80:8080'
   - '4440:5000'
+
+# Artifactory Settings
+docker_artifactory_env:
+  DB_TYPE: 'postgresql'
+  DB_HOST: '10.0.2.15' # Change to ip of eth0 on vagrant VM (ifconfig)
+  DB_PORT: '5432'
+  DB_USER: 'postgres'
+  DB_PASSWORD: 'root'

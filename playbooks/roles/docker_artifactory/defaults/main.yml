@@ -1,7 +1,7 @@
 ---
 docker_artifactory_name: 'artifactory' #check what this should be (web, app, db, etc)
 docker_artifactory_image: 'docker.bintray.io/jfrog/artifactory-pro:5.4.6'
-docker_jenkins_hostname: 'localhost'
+docker_artifactory_hostname: 'localhost'
 docker_artifactory_data_directories:
   - '/project/docker/artifactory'
 docker_artifactory_volumes:
@@ -11,7 +11,6 @@ docker_artifactory_env:
   DB_TYPE: 'postgresql'
   DB_HOST: 'localhost'
   DB_PORT: '5432'
-  #The following must match the POSTGRE_USER and POSTGRES_PASSWORD values passed to PostgresSQL
   DB_USER: 'postgres'
   DB_PASSWORD: 'mysecretpassword'
   #Add extra Java options by uncommenting the following line
