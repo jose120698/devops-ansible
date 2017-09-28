@@ -4,14 +4,24 @@
 machines = {
   'vagrant' => {
     'box' => 'travisrowland/centos7',
+    # VM => HOST
     'local_ports' => {
+      # Traefik
       '80' => '8880',
+      # Jenkins
+      '8080' => '8880',
+      # Jenkins
+      '5000' => '5000',
       # Rundeck
       '4440' => '4440',
       # Artifactory
       '8888' => '8888',
       # PostgresSQL
-      '5432' => '5432'
+      '5432' => '5432',
+      # SonarQube
+      '9000' => '9000',
+      # SonarQube
+      '9092' => '9092',
     },
   },
 }

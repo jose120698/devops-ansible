@@ -1,0 +1,6 @@
+---
+- name: Ansible HostType Consul Server Play
+  hosts: "{{ env }}:&consul_server"
+  become: True
+  roles:
+    - consul_server

@@ -1,5 +1,26 @@
+### env
 [vagrant]
 vagrant ansible_connection=local
 
+
+### HostType
+[docker_gitlab]
+#vagrant
+
 [docker_artifactory]
-vagrant
+#vagrant
+
+[docker_jenkins]
+#vagrant
+
+[consul_server]
+#vagrant
+
+[consul_agent]
+#vagrant
+
+[traefik]
+#vagrant
+
+[docker_sonarqube]
+#vagrant
