@@ -1,4 +1,29 @@
 ---
-- include: dirs.yml
-#- include: postgres.yml
-- include: artifactory.yml
+- name: Create necessary directories for Artifactory
+  file:
+    path: '{{ docker_artifactory_data_directory }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - docker_artifactory
+
+- name: Create Artifactory in Docker Container
+  docker_container:
+    name: '{{ docker_artifactory_name }}'
+    image: '{{ docker_artifactory_image }}'
+    #restart: always #might need to add a notify to restart Artifactory
+    ports: '{{ docker_artifactory_ports }}' #change this as needed
+    #depends_on:
+    #  - postgresql
+    #links:
+    #  - postgresql
+    volumes: '{{ docker_artifactory_volumes }}'
+    env: '{{ docker_artifactory_env }}'
+    #ulimits:
+    #  - 'nproc:65535'
+    #  - 'nofile:32000:40000'
+  #notify: Restart Artifactory
+  tags:
+    - docker_artifactory
