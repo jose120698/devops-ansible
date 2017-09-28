@@ -1,0 +1,7 @@
+---
+- name: Ansible HostType docker_sonarqube Play
+  hosts: "{{ env }}:&docker_sonarqube"
+  become: True
+  roles:
+    - docker_sonarqube
+

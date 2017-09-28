@@ -1,0 +1,18 @@
+---
+docker_sonarqube_name: 'sonarqube'
+docker_sonarqube_image: 'sonarqube:latest'
+docker_sonarqube_hostname: 'localhost'
+docker_sonarqube_env:
+  SONARQUBE_JDBC_USERNAME: 'sonar'
+  SONARQUBE_JDBC_PASSWORD: 'sonar'
+  SONARQUBE_JDBC_URL: 'jdbc:postgresql://localhost/sonar'
+docker_sonarqube_ports:
+  - '9000:9000'
+  - '9092:9092'
+docker_sonarqube_volumes:
+  - /project/docker/sonarqube/conf:/opt/sonarqube/conf
+  - /project/docker/sonarqube/data:/opt/sonarqube/data
+  - /project/docker/sonarqube/extensions:/opt/sonarqube/extensions
+  - /project/docker/sonarqube/bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+docker_sonarqube_data_directories:
+  - '/project/docker/sonarqube'

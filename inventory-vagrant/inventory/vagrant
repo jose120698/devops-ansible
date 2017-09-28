@@ -16,6 +16,9 @@ vagrant
 [docker_jenkins]
 #vagrant
 
+[docker_sonarqube]
+vagrant
+
 [consul_server]
 #vagrant
 
@@ -23,7 +26,4 @@ vagrant
 #vagrant
 
 [traefik]
-#vagrant
-
-[docker_sonarqube]
 #vagrant
