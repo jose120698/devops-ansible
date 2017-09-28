@@ -1,10 +1,12 @@
 ---
 docker_artifactory_name: 'artifactory' #check what this should be (web, app, db, etc)
-docker_artifactory_image: 'docker.bintray.io/jfrog/artifactory-oss:5.4.6'
-docker_artifactory_data_directory: /project/docker/artifactory
+docker_artifactory_image: 'docker.bintray.io/jfrog/artifactory-pro:5.4.6'
+docker_jenkins_hostname: 'localhost'
+docker_artifactory_data_directories:
+  - '/project/docker/artifactory'
 docker_artifactory_volumes:
   - '/project/docker/artifactory:/var/opt/jfrog/artifactory'
-docker_artifactory_ports: '8888:8081'
+docker_artifactory_ports: '8081:8081'
 docker_artifactory_env:
   DB_TYPE: 'postgresql'
   DB_HOST: 'localhost'

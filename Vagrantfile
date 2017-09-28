@@ -15,7 +15,7 @@ machines = {
       # Rundeck
       '4440' => '4440',
       # Artifactory
-      '8888' => '8888',
+      '8081' => '8888',
       # PostgresSQL
       '5432' => '5432',
       # SonarQube

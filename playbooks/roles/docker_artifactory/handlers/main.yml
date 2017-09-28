@@ -1,6 +1,6 @@
 ---
-#- name: Restart Artifactory
-#  docker_container:
-#    name: '{{ docker_artifactory_name }}'
-#    state: started
-#    restart: True
+- name: Restart Artifactory
+  docker_container:
+    name: '{{ docker_artifactory_name }}'
+    state: started
+    restart: True

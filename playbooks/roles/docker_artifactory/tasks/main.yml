@@ -1,11 +1,12 @@
 ---
-- name: Create necessary directories for Artifactory
+- name: Create Artifactory data directories
   file:
-    path: '{{ docker_artifactory_data_directory }}'
     state: directory
+    path: '{{ item }}'
     owner: root
     group: root
-    mode: 0755
+    # mode: 0755
+  with_items: '{{ docker_artifactory_data_directories }}'
   tags:
     - docker_artifactory
 
@@ -13,17 +14,13 @@
   docker_container:
     name: '{{ docker_artifactory_name }}'
     image: '{{ docker_artifactory_image }}'
-    #restart: always #might need to add a notify to restart Artifactory
-    ports: '{{ docker_artifactory_ports }}' #change this as needed
-    #depends_on:
-    #  - postgresql
-    #links:
-    #  - postgresql
-    volumes: '{{ docker_artifactory_volumes }}'
+    hostname: '{{ docker_artifactory_hostname }}'
     env: '{{ docker_artifactory_env }}'
+    published_ports: '{{ docker_artifactory_ports }}'
+    volumes: '{{ docker_artifactory_volumes }}'
     #ulimits:
     #  - 'nproc:65535'
     #  - 'nofile:32000:40000'
-  #notify: Restart Artifactory
+  # notify: Restart Artifactory
   tags:
     - docker_artifactory
