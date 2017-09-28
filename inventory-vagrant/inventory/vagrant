@@ -4,11 +4,14 @@ vagrant ansible_connection=local
 
 
 ### HostType
+[docker_postgres]
+#vagrant
+
 [docker_gitlab]
 #vagrant
 
 [docker_jenkins]
-vagrant
+#vagrant
 
 [consul_server]
 #vagrant

@@ -29,6 +29,7 @@
 
 # Include your playbooks below, order may be important
 ## Note that this is using the intersection of the HostType/Docker and env groups.
+- include: Docker-postgres.yml
 - include: Docker-gitlab.yml
 - include: Docker-jenkins.yml
 - include: HostType-consul_server.yml
