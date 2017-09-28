@@ -1,10 +1,21 @@
 ---
+- name: Create SonarQube data directories
+  file:
+    state: directory
+    path: '{{ item }}'
+    owner: root
+    group: root
+  with_items: '{{ docker_sonarqube_data_directories }}'
+  tags:
+    - docker_sonarqube
+
 - name: Create a SonarQube container
   docker_container:
     name: '{{ docker_sonarqube_name }}'
     image: '{{ docker_sonarqube_image }}'
     hostname: '{{ docker_sonarqube_hostname }}'
+    env: '{{ docker_sonarqube_env }}'
     published_ports: '{{ docker_sonarqube_ports }}'
-#    volumes: '{{ docker_sonarqube_volumes }}'
+    volumes: '{{ docker_sonarqube_volumes }}'
   tags:
     - docker_sonarqube
