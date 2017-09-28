@@ -50,3 +50,9 @@ docker_artifactory_env:
   DB_PORT: '5432'
   DB_USER: 'postgres'
   DB_PASSWORD: 'root'
+
+# SonarQube Settings
+docker_sonarqube_env:
+  SONARQUBE_JDBC_USERNAME: 'postgres'
+  SONARQUBE_JDBC_PASSWORD: 'root'
+  SONARQUBE_JDBC_URL: 'jdbc:postgresql://10.0.2.15/postgres' # Change to ip of eth0 on vagrant VM (ifconfig)

@@ -29,11 +29,11 @@
 
 # Include your playbooks below, order may be important
 ## Note that this is using the intersection of the HostType/Docker and env groups.
+- include: HostType-consul_server.yml
+- include: HostType-consul_agent.yml
+- include: HostType-traefik.yml
 - include: Docker-postgres.yml
 - include: Docker-artifactory.yml
 - include: Docker-gitlab.yml
 - include: Docker-jenkins.yml
-- include: HostType-consul_server.yml
-- include: HostType-consul_agent.yml
-- include: HostType-traefik.yml
 - include: Docker-sonarqube.yml
