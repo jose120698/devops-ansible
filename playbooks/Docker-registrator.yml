@@ -1,0 +1,6 @@
+---
+- name: Ansible HostType docker_registrator Play
+  hosts: "{{ env }}:&docker_registrator"
+  become: True
+  roles:
+    - docker_registrator
