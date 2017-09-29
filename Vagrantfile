@@ -6,12 +6,22 @@ machines = {
     'box' => 'travisrowland/centos7',
     # VM => HOST
     'local_ports' => {
-      # Docker Jenkins
+      # Traefik
       '80' => '8880',
+      # Jenkins
+      '8080' => '8880',
+      # Jenkins
+      '5000' => '5000',
       # Rundeck
       '4440' => '4440',
-      # Docker Jenkins
-      '5000' => '5000',
+      # Artifactory
+      '8081' => '8888',
+      # PostgresSQL
+      '5432' => '5432',
+      # SonarQube
+      '9000' => '9000',
+      # SonarQube
+      '9092' => '9092',
     },
   },
 }
