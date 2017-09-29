@@ -1,0 +1,10 @@
+---
+- name: Create a Registrator container
+  docker_container:
+    name: '{{ docker_registrator_name }}'
+    image: '{{ docker_registrator_image }}'
+    volumes: '{{ docker_registrator_volumes }}'
+    command: '{{ docker_registrator_command }}'
+    network_mode: 'host'
+  tags:
+    - docker_registrator

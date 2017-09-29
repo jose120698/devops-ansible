@@ -32,6 +32,7 @@
 - include: HostType-consul_server.yml
 - include: HostType-consul_agent.yml
 - include: HostType-traefik.yml
+- include: Docker-registrator.yml
 - include: Docker-postgres.yml
 - include: Docker-artifactory.yml
 - include: Docker-gitlab.yml
