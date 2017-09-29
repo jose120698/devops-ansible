@@ -2,5 +2,6 @@
 - name: Restart Docker Artifactory
   docker_container:
     name: '{{ docker_artifactory_name }}'
+    image: '{{ docker_artifactory_image }}'
     state: started
     restart: True

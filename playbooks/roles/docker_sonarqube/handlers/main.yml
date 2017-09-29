@@ -2,5 +2,6 @@
 - name: Restart Docker SonarQube
   docker_container:
     name: '{{ docker_sonarqube_name }}'
+    image: '{{ docker_sonarqube_image }}'
     state: started
     restart: True

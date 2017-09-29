@@ -2,5 +2,6 @@
 - name: Restart Docker Postgres
   docker_container:
     name: '{{ docker_postgres_name }}'
+    image: '{{ docker_postgres_image }}'
     state: started
     restart: True

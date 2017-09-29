@@ -5,19 +5,19 @@ vagrant ansible_connection=local
 
 ### HostType
 [docker_postgres]
-#vagrant
+vagrant
 
 [docker_gitlab]
 #vagrant
 
 [docker_artifactory]
-#vagrant
+vagrant
 
 [docker_jenkins]
 #vagrant
 
 [docker_sonarqube]
-#vagrant
+vagrant
 
 [docker_registrator]
 #vagrant

@@ -2,5 +2,6 @@
 - name: Restart Docker GitLab
   docker_container:
     name: '{{ docker_gitlab_name }}'
+    image: '{{ docker_gitlab_image }}'
     state: started
     restart: True

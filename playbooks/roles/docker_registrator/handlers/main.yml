@@ -2,5 +2,6 @@
 - name: Restart Docker Registrator
   docker_container:
     name: '{{ docker_registrator_name }}'
+    image: '{{ docker_registrator_image }}'
     state: started
     restart: True
