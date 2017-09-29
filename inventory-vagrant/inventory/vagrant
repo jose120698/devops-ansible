@@ -23,10 +23,10 @@ vagrant ansible_connection=local
 #vagrant
 
 [consul_server]
-#vagrant
+vagrant
 
 [consul_agent]
-#vagrant
+vagrant
 
 [traefik]
-#vagrant
+vagrant

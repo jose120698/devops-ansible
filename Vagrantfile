@@ -89,7 +89,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # View the documentation for the provider you're using for more
       # information on available options.
       machine.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", 768]
+        vb.memory = 512
+        vb.cpus = 1
       end
 
       # Enable provisioning with CFEngine. CFEngine Community packages are
