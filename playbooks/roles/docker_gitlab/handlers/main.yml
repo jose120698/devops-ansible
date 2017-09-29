@@ -1,5 +1,5 @@
 ---
-- name: restart Docker Gitlab
+- name: Restart Docker GitLab
   docker_container:
     name: '{{ docker_gitlab_name }}'
     state: started

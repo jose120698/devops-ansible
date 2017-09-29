@@ -5,7 +5,6 @@
     path: '{{ item }}'
     owner: root
     group: root
-    # Jenkins runs as 'jenkins' user in container
     mode: 0777
   with_items: '{{ docker_jenkins_data_directories }}'
   tags:
@@ -20,5 +19,6 @@
     env: '{{ docker_jenkins_env }}'
     published_ports: '{{ docker_jenkins_ports }}'
     volumes: '{{ docker_jenkins_volumes }}'
+  notify: Restart Docker Jenkins
   tags:
     - docker_jenkins

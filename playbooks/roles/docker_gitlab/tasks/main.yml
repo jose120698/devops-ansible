@@ -5,6 +5,7 @@
     path: '{{ item }}'
     owner: root
     group: root
+    mode: 0777
   with_items: '{{ docker_gitlab_data_directories }}'
   tags:
     - docker_gitlab
@@ -16,7 +17,7 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart Docker Gitlab
+  notify: restart Docker GitLab
   tags:
     - docker_gitlab
 
@@ -29,5 +30,6 @@
     env: '{{ docker_gitlab_env }}'
     published_ports: '{{ docker_gitlab_ports }}'
     volumes: '{{ docker_gitlab_volumes }}'
+  notify: Restart Docker Gitlab
   tags:
     - docker_gitlab

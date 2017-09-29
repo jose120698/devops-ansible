@@ -1,6 +1,6 @@
 ---
-- name: restart Docker Jenkins
+- name: Restart Docker Registrator
   docker_container:
-    name: '{{ docker_jenkins_name }}'
+    name: '{{ docker_registrator_name }}'
     state: started
     restart: True

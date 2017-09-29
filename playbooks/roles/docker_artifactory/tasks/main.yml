@@ -5,7 +5,7 @@
     path: '{{ item }}'
     owner: root
     group: root
-    # mode: 0755
+    mode: 0777
   with_items: '{{ docker_artifactory_data_directories }}'
   tags:
     - docker_artifactory
@@ -21,6 +21,6 @@
     #ulimits:
     #  - 'nproc:65535'
     #  - 'nofile:32000:40000'
-  # notify: Restart Artifactory
+  notify: Restart Docker Artifactory
   tags:
     - docker_artifactory

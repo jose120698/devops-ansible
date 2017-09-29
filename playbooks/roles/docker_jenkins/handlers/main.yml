@@ -1,5 +1,5 @@
 ---
-- name: restart Docker Jenkins
+- name: Restart Docker Jenkins
   docker_container:
     name: '{{ docker_jenkins_name }}'
     state: started

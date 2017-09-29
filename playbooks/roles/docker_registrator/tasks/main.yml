@@ -6,5 +6,6 @@
     volumes: '{{ docker_registrator_volumes }}'
     command: '{{ docker_registrator_command }}'
     network_mode: 'host'
+  notify: Restart Docker Registrator
   tags:
     - docker_registrator

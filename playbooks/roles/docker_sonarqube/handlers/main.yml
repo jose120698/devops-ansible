@@ -1,0 +1,6 @@
+---
+- name: Restart Docker SonarQube
+  docker_container:
+    name: '{{ docker_sonarqube_name }}'
+    state: started
+    restart: True
