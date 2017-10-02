@@ -26,6 +26,11 @@ common_packages:
   - rng-tools
   - unzip
   - wget
+  - vim
+
+common_pip_packages:
+  - virtualenv
+  - docker-py
 
 # Common Consul settings
 consul_install_nginx: False
