@@ -26,6 +26,7 @@
     - common
     - sshd
     - java
+    - sudo
 
 # Include your playbooks below, order may be important
 ## Note that this is using the intersection of the HostType/Docker and env groups.

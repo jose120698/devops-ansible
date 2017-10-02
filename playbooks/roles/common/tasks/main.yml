@@ -84,36 +84,37 @@
   tags:
     - common
 
-- name: set /etc/hosts
-  lineinfile:
-    dest: '{{ vm_host_file }}'
-    regexp: '^127\.0\.0\.1[ \t]+localhost'
-    line: '127.0.0.1 localhost {{ inventory_hostname }}'
-    state: present
-  when: inventory_hostname not in 'vagrant'
-  tags:
-    - common
+#- name: set /etc/hosts
+#  lineinfile:
+#    dest: '{{ vm_host_file }}'
+#    regexp: '^127\.0\.0\.1[ \t]+localhost'
+#    line: '127.0.0.1 localhost {{ inventory_hostname }}'
+#    state: present
+#  when: inventory_hostname not in 'vagrant'
+#  tags:
+#    - common
 
 ## Temporarily disabled due to Rundeck Ansible execution. RCA TBD
-# - name: Get timedatectl information
-#   command: timedatectl
-#   register: timedatectl
-#   changed_when: False
-#   tags:
-#     - common
+#- name: Get timedatectl information
+#  command: timedatectl
+#  register: timedatectl
+#  changed_when: False
+#  tags:
+#    - common
 #
-# - name: Set timezone to UTC
-#   command: timedatectl set-timezone UTC
-#   when: "'Time zone: UTC' not in timedatectl.stdout"
-#   tags:
-#     - common
+#- name: Set timezone to UTC
+#  command: timedatectl set-timezone UTC
+#  when: "'Time zone: UTC' not in timedatectl.stdout"
+#  tags:
+#    - common
 
-- name: Clear Ansible user password if exist
-  shell: passwd -d {{ ansible_user }}
-  changed_when: False
-  # when: ansiblepass|success
-  tags:
-    - common
+## Temporarily disabled to prevent accidents
+#- name: Clear Ansible user password if exist
+#  shell: passwd -d {{ ansible_user }}
+#  changed_when: False
+#  # when: ansiblepass|success
+#  tags:
+#    - common
 
 - name: Set coredump hard limit
   lineinfile:
