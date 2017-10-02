@@ -17,7 +17,7 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart Docker GitLab
+  notify: Restart Docker GitLab
   tags:
     - docker_gitlab
 
