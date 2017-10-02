@@ -36,9 +36,13 @@ common_pip_packages:
 consul_install_nginx: False
 consul_install_nginx_config: False
 consul_bootstrap: True
-consul_bind_address: "{{ ansible_default_ipv4['address'] }}"
-consul_use_upstart: false
-consul_use_systemd: true
+consul_use_upstart: False
+consul_use_systemd: True
+consul_servers: ['192.168.100.101']   # Sergey's default. TODO: Need a good way to extract ansible_host values from hostvars inside consul_server group
+consul_join_at_start: True
+consul_retry_join: True
+consul_retry_interval: 30s
+consul_bind_address: "0.0.0.0"
 
 # Traefik settings
 traefik_template: traefik-custom.toml
