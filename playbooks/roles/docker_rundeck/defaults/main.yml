@@ -7,8 +7,8 @@ docker_rundeck_hostname: 'localhost'
 # LOGIN_MODULE - RDpropertyfilelogin(default) or ldap. See: http://rundeck.org/docs/administration/authenticating-users.html
 # JAAS_CONF_FILE - ldap configuration file name if ldap. You will need to mount the same file at /etc/rundeck/<filename of ldap>. See: http://rundeck.org/docs/administration/authenticating-users.html
 docker_rundeck_env:
-  SERVER_URL: 'http://localhost:4440'
-  EXTERNAL_SERVER_URL: 'http://localhost:4440'
+  SERVER_URL: 'http://{{ docker_rundeck_hostname }}:4440'
+  # EXTERNAL_SERVER_URL: 'http://{{ docker_rundeck_hostname }}:4440'
 docker_rundeck_volumes:
   - '/project/docker/rundeck/etc/rundeck:/etc/rundeck'
   - '/project/docker/rundeck/var/rundeck:/var/rundeck'
