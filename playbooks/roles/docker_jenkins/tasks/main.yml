@@ -14,11 +14,10 @@
   docker_container:
     name: '{{ docker_jenkins_name }}'
     image: '{{ docker_jenkins_image }}'
-    # restart: True
     hostname: '{{ docker_jenkins_hostname }}'
     env: '{{ docker_jenkins_env }}'
     published_ports: '{{ docker_jenkins_ports }}'
     volumes: '{{ docker_jenkins_volumes }}'
-  notify: Restart Docker Jenkins
+  # notify: Restart Docker Jenkins
   tags:
     - docker_jenkins

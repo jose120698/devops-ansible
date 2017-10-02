@@ -21,6 +21,6 @@
     #ulimits:
     #  - 'nproc:65535'
     #  - 'nofile:32000:40000'
-  notify: Restart Docker Artifactory
+  # notify: Restart Docker Artifactory
   tags:
     - docker_artifactory

@@ -30,6 +30,6 @@
     env: '{{ docker_gitlab_env }}'
     published_ports: '{{ docker_gitlab_ports }}'
     volumes: '{{ docker_gitlab_volumes }}'
-  notify: Restart Docker GitLab
+  # notify: Restart Docker GitLab
   tags:
     - docker_gitlab
