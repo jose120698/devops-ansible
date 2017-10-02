@@ -1,0 +1,98 @@
+# docker_rundeck
+This role serves to spin up and manage Rundeck Docker containers.
+
+## How To Use
+1. Add your Rundeck configurations to Ansible inventory, use `playbooks/roles/docker_rundeck/defaults/main.yml` as a reference.
+2. Add your host to the `[docker_rundeck]` host group in Ansible inventory
+3. Execute Ansible.
+
+# rundeck
+https://github.com/jjethwa/rundeck
+
+# Image details
+
+1. Based on debian:stretch
+1. Supervisor, Apache2, and rundeck
+1. No SSH.  Use docker exec or [nsenter](https://github.com/jpetazzo/nsenter)
+1. If RUNDECK_PASSWORD is not supplied, it will be randomly generated and shown via stdout.
+1. Supply the SERVER_URL or it will default to https://0.0.0.0:4443
+1. As always, update passwords for pre-installed accounts
+1. I sometimes get connection reset by peer errors when building the Docker image from the Rundeck download URL.  Trying again usually works.
+
+
+# Automated build
+
+```
+docker pull jordan/rundeck
+```
+
+# Usage
+Start a new container and bind to host's port 4440
+
+```
+sudo docker run -p 4440:4440 -e SERVER_URL=http://MY.HOSTNAME.COM:4440 --name rundeck -t jordan/rundeck:latest
+```
+
+# SSL
+Start a new container, bind to host's port 4443, and enable SSL.   Note: Make sure to update /etc/rundeck/ssl/keystore and /etc/rundeck/ssl/truststore for Production systems as the default certificate is self-signed. Set KEYSTORE_PASS & TRUSTSTORE_PASS to the passwords of those files. Both files can be volume mounted.
+```
+sudo docker run -p 4443:4443 -e SERVER_URL=https://MY.HOSTNAME.COM:4443 -e RUNDECK_WITH_SSL=true --name rundeck -t jordan/rundeck:latest
+```
+
+# Rundeck plugins
+To add (external) plugins, add the jars to the /opt/rundeck-plugins volume and they will be copied over to Rundeck's libext directory at container startup
+
+# Environment variables
+
+```
+SERVER_URL - Full URL in the form http://MY.HOSTNAME.COM:4440, http//123.456.789.012:4440, etc
+
+EXTERNAL_SERVER_URL - Use this if you are running rundeck behind a proxy.  This is useful if you run rundeck through some kind of external network gateway/load balancer.  Note that utilities like rd-jobs and rd-projects will no longer work and you will need to use the newer [rd](https://github.com/rundeck/rundeck-cli) command line utility.
+
+RDECK_JVM_SETTINGS - Additional parameters sent to the rundeck JVM (ex: -Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server -Dfile.encoding=UTF-8 -Dserver.web.context=/rundeck)
+
+DATABASE_URL - For use with (container) external database
+
+RUNDECK_UID - The unix user ID to be used for the rundeck account when rundeck is booted.  This is useful for embedding this docker container into your development environment sharing files via docker volumes between the container and your host OS.  RUNDECK_GID also needs to be defined for this overload to take place.
+
+RUNDECK_GID - The unix group ID to be used for the rundeck account when rundeck is booted.  This is useful for embedding this docker container into your development environment sharing files via docker volumes between the container and your host OS.  RUNDECK_UID also needs to be defined for this overload to take place.
+
+RUNDECK_WITH_SSL - Enable SSL
+
+RUNDECK_PASSWORD - MySQL 'rundeck' user password
+
+RUNDECK_ADMIN_PASSWORD - The rundeck server admin password
+
+RUNDECK_STORAGE_PROVIDER - Options file (default) or db.  See: http://rundeck.org/docs/plugins-user-guide/configuring.html#storage-plugins
+
+RUNDECK_PROJECT_STORAGE_TYPE - Options file (default) or db.  See: http://rundeck.org/docs/administration/setting-up-an-rdb-datasource.html
+
+GUI_BRAND_HTML - HTML to show as title in app header. See: http://rundeck.org/docs/administration/gui-customization.html. Useful to show Rundeck environment where multiple Rundeck instances are deployed, e.g. GUI_BRAND_HTML='<span class="title">QA Environment</span>'
+
+DEBIAN_SYS_MAINT_PASSWORD - No longer used as of Debian Stretch
+
+NO_LOCAL_MYSQL - false (default).  Set to true if using an external MySQL container or instance.  Make sure to set DATABASE_URL and RUNDECK_PASSWORD (used for JDBC connection to MySQL).  Further details for setting up MYSQL: http://rundeck.org/docs/administration/setting-up-an-rdb-datasource.html
+
+LOGIN_MODULE - RDpropertyfilelogin(default) or ldap. See: http://rundeck.org/docs/administration/authenticating-users.html
+
+JAAS_CONF_FILE - ldap configuration file name if ldap. You will need to mount the same file at /etc/rundeck/<filename of ldap>. See: http://rundeck.org/docs/administration/authenticating-users.html
+```
+
+# Volumes
+
+```
+/etc/rundeck
+/var/rundeck
+/var/lib/rundeck - Not recommended to use as a volume as it contains webapp.  For SSH key you can use the this volume: /var/lib/rundeck/.ssh
+/var/lib/mysql
+/var/log/rundeck
+/opt/rundeck-plugins - For adding external plugins
+/var/lib/rundeck/logs
+/var/lib/rundeck/var/storage
+```
+
+# Using an SSL Terminated Proxy
+See: http://rundeck.org/docs/administration/configuring-ssl.html#using-an-ssl-terminated-proxy
+
+# Upgrading
+See: http://rundeck.org/docs/upgrading/index.html

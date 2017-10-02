@@ -1,0 +1,6 @@
+---
+- name: Ansible HostType docker_rundeck Play
+  hosts: "{{ env }}:&docker_rundeck"
+  become: True
+  roles:
+    - docker_rundeck

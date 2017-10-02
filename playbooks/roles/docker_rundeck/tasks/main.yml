@@ -1,0 +1,24 @@
+---
+- name: Create Rundeck data directories
+  file:
+    state: directory
+    path: '{{ item }}'
+    owner: root
+    group: root
+    mode: 0777
+  with_items: '{{ docker_rundeck_data_directories }}'
+  tags:
+    - docker_rundeck
+
+- name: Create a Rundeck container
+  docker_container:
+    name: '{{ docker_rundeck_name }}'
+    image: '{{ docker_rundeck_image }}'
+    # restart: True
+    hostname: '{{ docker_rundeck_hostname }}'
+    env: '{{ docker_rundeck_env }}'
+    published_ports: '{{ docker_rundeck_ports }}'
+    volumes: '{{ docker_rundeck_volumes }}'
+  notify: Restart Docker Rundeck
+  tags:
+    - docker_rundeck

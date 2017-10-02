@@ -1,0 +1,7 @@
+---
+- name: Restart Docker Rundeck
+  docker_container:
+    name: '{{ docker_rundeck_name }}'
+    image: '{{ docker_rundeck_image }}'
+    state: started
+    restart: True

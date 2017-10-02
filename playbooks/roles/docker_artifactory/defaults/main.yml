@@ -1,6 +1,6 @@
 ---
-docker_artifactory_name: 'artifactory' #check what this should be (web, app, db, etc)
-docker_artifactory_image: 'docker.bintray.io/jfrog/artifactory-pro:5.4.6'
+docker_artifactory_name: 'artifactory'
+docker_artifactory_image: 'docker.bintray.io/jfrog/artifactory-pro:latest'
 docker_artifactory_hostname: 'localhost'
 docker_artifactory_data_directories:
   - '/project/docker/artifactory'

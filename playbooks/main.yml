@@ -33,6 +33,7 @@
 - include: HostType-consul_agent.yml
 - include: HostType-traefik.yml
 - include: Docker-registrator.yml
+- include: Docker-rundeck.yml
 - include: Docker-postgres.yml
 - include: Docker-artifactory.yml
 - include: Docker-gitlab.yml
