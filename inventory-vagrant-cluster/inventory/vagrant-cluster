@@ -19,6 +19,9 @@ devops1
 
 [docker_registrator]
 #vagrant
+devops1
+devops2
+devops3
 
 [traefik]
 devops1
