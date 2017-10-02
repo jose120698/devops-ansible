@@ -1,0 +1,67 @@
+---
+ansible_user: 'vagrant'
+# ansible_ssh_user: "{{ ansible_user }}"
+become_user: "{{ ansible_user }}"
+
+sudo_sudoers:
+  # - 'ansible'
+  # - 'jenkins'
+  # - 'rundeck'
+  # - 'sensu'
+  - 'devops'
+
+common_packages:
+  - libselinux-python
+  - selinux-policy
+  - nano
+  - net-tools
+  - bind-utils
+  - nc
+  - screen
+  - git
+  - htop
+  - ncdu
+  - python-pip
+  - haveged
+  - rng-tools
+  - unzip
+  - wget
+  - vim
+
+common_pip_packages:
+  - virtualenv
+  - docker-py
+
+# Common Consul settings
+consul_install_nginx: False
+consul_install_nginx_config: False
+consul_bootstrap: True
+consul_use_upstart: False
+consul_use_systemd: True
+consul_servers: ['192.168.100.101']   # Sergey's default. TODO: Need a good way to extract ansible_host values from hostvars inside consul_server group
+consul_join_at_start: True
+consul_retry_join: True
+consul_retry_interval: 30s
+consul_bind_address: "0.0.0.0"
+
+# Traefik settings
+traefik_template: traefik-custom.toml
+
+# Jenkins settings
+docker_jenkins_ports:
+  - '80:8080'
+  - '4440:5000'
+
+# Artifactory Settings
+docker_artifactory_env:
+  DB_TYPE: 'postgresql'
+  DB_HOST: '10.0.2.15' # Change to ip of eth0 on vagrant VM (ifconfig)
+  DB_PORT: '5432'
+  DB_USER: 'postgres'
+  DB_PASSWORD: 'root'
+
+# SonarQube Settings
+docker_sonarqube_env:
+  SONARQUBE_JDBC_USERNAME: 'postgres'
+  SONARQUBE_JDBC_PASSWORD: 'root'
+  SONARQUBE_JDBC_URL: 'jdbc:postgresql://10.0.2.15/postgres' # Change to ip of eth0 on vagrant VM (ifconfig)

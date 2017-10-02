@@ -1,0 +1,26 @@
+# Sergey's custom inventory for testing purposes
+#
+# ansible-playbook -e "env=vagrant" site.yml -t consul_server,consul_agent,traefik -i inventory-vagrant-cluster
+#
+### env
+[vagrant]
+devops1 ansible_user=vagrant ansible_host=192.168.100.101 consul_advertise_address=192.168.100.101
+devops2 ansible_user=vagrant ansible_host=192.168.100.102 consul_advertise_address=192.168.100.102
+devops3 ansible_user=vagrant ansible_host=192.168.100.103 consul_advertise_address=192.168.100.103
+
+### HostType
+[consul_agent]
+devops2
+devops3
+
+[consul_server]
+#vagrant
+devops1
+
+[docker_registrator]
+#vagrant
+
+[traefik]
+devops1
+devops2
+devops3
