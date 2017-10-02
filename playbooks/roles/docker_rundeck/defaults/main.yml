@@ -1,0 +1,23 @@
+---
+docker_rundeck_name: 'rundeck'
+docker_rundeck_image: 'jordan/rundeck:latest'
+docker_rundeck_hostname: 'localhost'
+# See README.md for full list of env vars
+## TODO: Configure LDAP
+# LOGIN_MODULE - RDpropertyfilelogin(default) or ldap. See: http://rundeck.org/docs/administration/authenticating-users.html
+# JAAS_CONF_FILE - ldap configuration file name if ldap. You will need to mount the same file at /etc/rundeck/<filename of ldap>. See: http://rundeck.org/docs/administration/authenticating-users.html
+docker_rundeck_env:
+  SERVER_URL: 'http://localhost:4440'
+  EXTERNAL_SERVER_URL: 'http://localhost:4440'
+docker_rundeck_volumes:
+  - '/project/docker/rundeck/etc/rundeck:/etc/rundeck'
+  - '/project/docker/rundeck/var/rundeck:/var/rundeck'
+  - '/project/docker/rundeck/var/lib/mysql:/var/lib/mysql'
+  - '/project/docker/rundeck/var/log/rundeck:/var/log/rundeck'
+  - '/project/docker/rundeck/opt/rundeck-plugins:/opt/rundeck-plugins'
+  - '/project/docker/rundeck/var/lib/rundeck/logs:/var/lib/rundeck/logs'
+  - '/project/docker/rundeck/var/lib/rundeck/var/storage:/var/lib/rundeck/var/storage'
+docker_rundeck_data_directories:
+  - '/project/docker/rundeck'
+docker_rundeck_ports:
+  - '4440:4440'
