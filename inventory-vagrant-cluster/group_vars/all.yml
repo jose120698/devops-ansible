@@ -38,7 +38,7 @@ consul_install_nginx_config: False
 consul_bootstrap: True
 consul_use_upstart: False
 consul_use_systemd: True
-consul_servers: ['192.168.100.101']   # Sergey's default. TODO: Need a good way to extract ansible_host values from hostvars inside consul_server group
+consul_servers: "{{ groups['consul_server'] | map('extract', hostvars, 'consul_advertise_address') | list }}"
 consul_join_at_start: True
 consul_retry_join: True
 consul_retry_interval: 30s

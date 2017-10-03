@@ -1,6 +1,6 @@
 # Sergey's custom inventory for testing purposes
 #
-# ansible-playbook -e "env=vagrant" site.yml -t consul_server,consul_agent,traefik -i inventory-vagrant-cluster
+# ansible-playbook -e "env=vagrant" site.yml -t common,consul_server,consul_agent,traefik,docker_registrator -i inventory-vagrant-cluster
 #
 ### env
 [vagrant]
