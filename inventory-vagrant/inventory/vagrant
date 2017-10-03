@@ -1,19 +1,13 @@
 ### env
 [vagrant]
 vagrant ansible_connection=local
-#SERGEY> devops1 ansible_user=vagrant ansible_host=192.168.100.101 consul_advertise_address=192.168.100.101
-#SERGEY> devops2 ansible_user=vagrant ansible_host=192.168.100.102 consul_advertise_address=192.168.100.102
-#SERGEY> devops3 ansible_user=vagrant ansible_host=192.168.100.103 consul_advertise_address=192.168.100.103
 
 ### HostType
 [consul_agent]
 #vagrant
-#SERGEY> devops2
-#SERGEY> devops3
 
 [consul_server]
 #vagrant
-#SERGEY> devops1
 
 [docker_artifactory]
 #vagrant
@@ -38,6 +32,3 @@ vagrant ansible_connection=local
 
 [traefik]
 #vagrant
-#SERGEY> devops1
-#SERGEY> devops2
-#SERGEY> devops3
