@@ -2,6 +2,8 @@
 # @see https://raw.githubusercontent.com/containous/traefik/master/contrib/systemd/traefik.service
 [Unit]
 Description=Traefik
+After=consul.service
+Requires=consul.service
 
 [Service]
 Type=notify
