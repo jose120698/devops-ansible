@@ -44,9 +44,6 @@ consul_retry_join: True
 consul_retry_interval: 30s
 consul_bind_address: "0.0.0.0"
 
-# Traefik settings
-traefik_template: traefik-custom.toml
-
 # Jenkins settings
 docker_jenkins_ports:
   - '80:8080'
