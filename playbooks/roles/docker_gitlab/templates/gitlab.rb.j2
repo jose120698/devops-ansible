@@ -185,7 +185,15 @@ gitlab_rails['gitlab_email_subject_suffix'] = '{{ docker_gitlab_gitlab_email_sub
 ###! **Be careful not to break the indentation in the ldap_servers block. It is
 ###!   in yaml format and the spaces must be retained. Using tabs will not work.**
 
-# gitlab_rails['ldap_enabled'] = false
+gitlab_rails['ldap_enabled'] = {{ docker_gitlab_ldap_enabled }}
+gitlab_rails['ldap_host'] = '{{ docker_gitlab_ldap_host }}'
+gitlab_rails['ldap_port'] = {{ docker_gitlab_ldap_port }}
+gitlab_rails['ldap_uid'] = '{{ docker_gitlab_ldap_uid }}'
+gitlab_rails['ldap_method'] = '{{ docker_gitlab_ldap_method}}' # 'ssl' or 'plain'
+gitlab_rails['ldap_bind_dn'] = '{{ docker_gitlab_ldap_bind_dn }}'
+gitlab_rails['ldap_password'] = '{{ docker_gitlab_ldap_password }}'
+gitlab_rails['ldap_allow_username_or_email_login'] = true
+gitlab_rails['ldap_base'] = '{{ docker_gitlab_ldap_base }}'
 
 ###! **remember to close this block with 'EOS' below**
 # gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
