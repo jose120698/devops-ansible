@@ -200,7 +200,7 @@ gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
    ca_file: ''
    ssl_version: ''
    active_directory: true
-   allow_username_or_email_login: true
+   allow_username_or_email_login: false
    block_auto_created_users: false
    base: '{{ docker_gitlab_ldap_base }}'
    user_filter: ''
