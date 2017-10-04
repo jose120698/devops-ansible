@@ -11,6 +11,7 @@ Group={{ consul_group }}
 ExecStart={{ consul_home }}/bin/consul agent -config-dir {{ consul_config_dir }} -config-file={{ consul_config_file }}
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
