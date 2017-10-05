@@ -18,6 +18,6 @@
     env: '{{ docker_sonarqube_env }}'
     published_ports: '{{ docker_sonarqube_ports }}'
     volumes: '{{ docker_sonarqube_volumes }}'
-  # notify: Restart Docker SonarQube
+    notify: Restart Docker SonarQube
   tags:
     - docker_sonarqube
