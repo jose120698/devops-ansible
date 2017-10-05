@@ -3,5 +3,9 @@
   docker_container:
     name: '{{ docker_sonarqube_name }}'
     image: '{{ docker_sonarqube_image }}'
+    hostname: '{{ docker_sonarqube_hostname }}'
+    env: '{{ docker_sonarqube_env }}'
+    published_ports: '{{ docker_sonarqube_ports }}'
+    volumes: '{{ docker_sonarqube_volumes }}'
     state: started
     restart: True
