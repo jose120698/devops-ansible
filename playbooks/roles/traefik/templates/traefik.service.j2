@@ -9,6 +9,7 @@ Requires=consul.service
 Type=notify
 ExecStart={{ traefik_bin_path }} --configFile={{ traefik_config_file }}
 Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target

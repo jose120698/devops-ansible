@@ -35,11 +35,11 @@ common_pip_packages:
 # Common Consul settings
 consul_install_nginx: False
 consul_install_nginx_config: False
-consul_bootstrap: True
+consul_bootstrap: False
 consul_use_upstart: False
 consul_use_systemd: True
 consul_servers: "{{ groups['consul_server'] | map('extract', hostvars, 'consul_advertise_address') | list }}"
-consul_join_at_start: True
+consul_join_at_start: False
 consul_retry_join: True
 consul_retry_interval: 30s
 consul_bind_address: "0.0.0.0"
