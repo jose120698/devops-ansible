@@ -18,6 +18,6 @@
     env: '{{ docker_postgres_env }}'
     published_ports: '{{ docker_postgres_ports }}'
     volumes: '{{ docker_postgres_volumes }}'
-  # notify: Restart Docker Postgres
+  notify: Restart Docker Postgres
   tags:
     - docker_postgres

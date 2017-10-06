@@ -3,5 +3,9 @@
   docker_container:
     name: '{{ docker_rundeck_name }}'
     image: '{{ docker_rundeck_image }}'
+    hostname: '{{ docker_rundeck_hostname }}'
+    env: '{{ docker_rundeck_env }}'
+    published_ports: '{{ docker_rundeck_ports }}'
+    volumes: '{{ docker_rundeck_volumes }}'
     state: started
     restart: True

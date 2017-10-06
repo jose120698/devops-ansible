@@ -18,6 +18,6 @@
     env: '{{ docker_jenkins_env }}'
     published_ports: '{{ docker_jenkins_ports }}'
     volumes: '{{ docker_jenkins_volumes }}'
-  # notify: Restart Docker Jenkins
+  notify: Restart Docker Jenkins
   tags:
     - docker_jenkins
