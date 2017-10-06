@@ -14,11 +14,10 @@
   docker_container:
     name: '{{ docker_rundeck_name }}'
     image: '{{ docker_rundeck_image }}'
-    # restart: True
     hostname: '{{ docker_rundeck_hostname }}'
     env: '{{ docker_rundeck_env }}'
     published_ports: '{{ docker_rundeck_ports }}'
     volumes: '{{ docker_rundeck_volumes }}'
-  # notify: Restart Docker Rundeck
+  notify: Restart Docker Rundeck
   tags:
     - docker_rundeck
