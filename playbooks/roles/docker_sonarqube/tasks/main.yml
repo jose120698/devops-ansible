@@ -10,6 +10,17 @@
   tags:
     - docker_sonarqube
 
+- name: Configure SonarQube
+  template:
+    src: sonar.properties.j2
+    dest: /project/docker/sonarqube/conf/sonar.properties
+    owner: root
+    group: root
+    mode: 0600
+  notify: Restart Docker SonarQube
+  tags:
+    - docker_sonarqube
+
 - name: Create a SonarQube container
   docker_container:
     name: '{{ docker_sonarqube_name }}'
