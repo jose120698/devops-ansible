@@ -13,7 +13,7 @@
 - name: Configure SonarQube
   template:
     src: sonar.properties.j2
-    dest: /project/docker/sonarqube/conf/sonar.properties
+    dest: /opt/sonarqube/conf/sonar.properties
     owner: root
     group: root
     mode: 0600
