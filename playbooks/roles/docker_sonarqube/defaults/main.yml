@@ -14,5 +14,6 @@ docker_sonarqube_volumes:
   - /project/docker/sonarqube/data:/opt/sonarqube/data
   - /project/docker/sonarqube/extensions:/opt/sonarqube/extensions
   - /project/docker/sonarqube/bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+  - /project/docker/sonarqube/temp:/opt/sonarqube/temp
 docker_sonarqube_data_directories:
   - '/project/docker/sonarqube'
