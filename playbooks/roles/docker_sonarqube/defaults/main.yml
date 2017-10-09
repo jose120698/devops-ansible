@@ -17,3 +17,10 @@ docker_sonarqube_volumes:
   - /project/docker/sonarqube/temp:/opt/sonarqube/temp
 docker_sonarqube_data_directories:
   - '/project/docker/sonarqube'
+  - '/project/docker/sonarqube/conf'
+docker_sonarqube_ldap_host: "example.com"
+#docker_sonarqube_ldap_port: "389"
+#docker_sonarqube_ldap_uid: "sAMAccountName"
+docker_sonarqube_ldap_bind_dn: "CN=Username,CN=Users,DC=example,DC=com"
+docker_sonarqube_ldap_password: "password"
+docker_sonarqube_ldap_base: "DC=example,DC=com"
