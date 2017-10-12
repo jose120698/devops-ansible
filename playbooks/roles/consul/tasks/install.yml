@@ -33,7 +33,6 @@
     dest={{consul_download_folder}}
     url_username={{ consul_download_username }}
     url_password={{ consul_download_password }}
-    validate_certs=False # Hardcoding this to False due to the unresolved Ansible issue: https://github.com/ansible/ansible/issues/25402
   register: consul_was_downloaded
   when: consul_archive_stat.stat.exists == False
 
