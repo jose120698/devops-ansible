@@ -27,12 +27,14 @@
   stat: path={{ consul_download_folder }}/{{ consul_archive }}
   register: consul_archive_stat
 
+# Hardcoding validate_certs=False due to the unresolved Ansible issue: https://github.com/ansible/ansible/issues/25402
 - name: download consul
   get_url: >
     url={{consul_download}}
     dest={{consul_download_folder}}
     url_username={{ consul_download_username }}
     url_password={{ consul_download_password }}
+    validate_certs=False
   register: consul_was_downloaded
   when: consul_archive_stat.stat.exists == False
 
