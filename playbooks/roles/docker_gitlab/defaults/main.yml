@@ -34,3 +34,5 @@ docker_gitlab_ldap_base: "DC=example,DC=com"
 # TODO:
 #  docker_gitlab_ldap_group_base: ''
 #  docker_gitlab_ldap_admin_group: ''
+#
+docker_gitlab_nginx_client_max_body_size: '250m'
