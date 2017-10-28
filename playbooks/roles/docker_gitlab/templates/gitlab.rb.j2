@@ -836,7 +836,7 @@ EOS
 ################################################################################
 
 # nginx['enable'] = true
-# nginx['client_max_body_size'] = '250m'
+nginx['client_max_body_size'] = '{{ docker_gitlab_nginx_client_max_body_size }}'
 # nginx['redirect_http_to_https'] = false
 # nginx['redirect_http_to_https_port'] = 80
 
