@@ -23,6 +23,16 @@ docker_gitlab_gitlab_email_display_name: 'Example'
 docker_gitlab_gitlab_email_reply_to: 'noreply@example.com'
 docker_gitlab_gitlab_email_subject_suffix: ''
 
+docker_gitlab_gitlab_smtp_enable: 'false'
+docker_gitlab_gitlab_smtp_address: 'smtp.server'
+docker_gitlab_gitlab_smtp_port: '465'
+docker_gitlab_gitlab_smtp_user_name: 'smtp user'
+docker_gitlab_gitlab_smtp_password: 'smtp password'
+docker_gitlab_gitlab_smtp_domain: 'example.com'
+docker_gitlab_gitlab_smtp_authentication: 'login'
+docker_gitlab_gitlab_smtp_enable_starttls_auto: 'true'
+docker_gitlab_gitlab_smtp_tls: 'false'
+
 docker_gitlab_ldap_enabled: 'false'
 docker_gitlab_ldap_host: "example.com"
 docker_gitlab_ldap_port: "389"
