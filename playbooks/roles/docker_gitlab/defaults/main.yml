@@ -16,7 +16,8 @@ docker_gitlab_ports:
   - '2222:22' # TODO: This conflicts with default vagrant SSH port
 
 docker_gitlab_gitlab_external_url: 'http://{{ docker_gitlab_hostname }}'
-docker_gitlab_gitlab_ssh_host: '{{ docker_gitlab_hostname }}:2222'
+docker_gitlab_gitlab_ssh_host: '{{ docker_gitlab_hostname }}'
+docker_gitlab_gitlab_shell_ssh_port: '2222'
 docker_gitlab_gitlab_email_enabled: 'true'
 docker_gitlab_gitlab_email_from: 'example@example.com'
 docker_gitlab_gitlab_email_display_name: 'Example'
